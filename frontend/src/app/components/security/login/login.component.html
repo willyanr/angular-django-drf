@@ -1,0 +1,37 @@
+<div class="container">
+   <div class="row">
+
+         <div class="card-body card-custom">
+
+            <div class="row">
+               
+                  <div class="col-4 custom-text">
+                     <div class="teste">
+                        <form (submit)="loginOn()">
+                           <h2 class="title2 mt-5">Faça o<br> seu login</h2>
+                           <div class="mb-3 mt-4">
+                           <label for="exampleInputEmail1" class="form-label">Nome de Usuário</label>
+                           <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" [(ngModel)]="username" name="user_name">
+                           <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                           </div>
+                           <div class="mb-3">
+                           <label for="exampleInputPassword1" class="form-label">Senha</label>
+                           <input type="password" class="form-control" id="exampleInputPassword1" [(ngModel)]="password" name="password">
+                           </div>
+                           <div class="mb-3 form-check">
+                           <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                           <label class="form-check-label" for="exampleCheck1">Lembrar de mim</label>
+                           </div>
+                           <button type="submit" class="btn btn-primary" (click)="loginOn()">Fazer Login <i class="fa-solid fa-arrow-right ms-5"></i></button>
+                        </form>
+                     </div>
+                  </div>
+         
+               <div class="col-2 p-0">
+                  <img src="./assets/img/avatar.jpg" alt="">
+               </div>
+            </div>
+         </div>
+
+   </div>
+</div>

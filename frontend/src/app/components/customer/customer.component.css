@@ -1,0 +1,110 @@
+.custom-text{
+    font-weight: 600;
+    margin-left: 100px;
+    
+
+
+
+}
+
+.card-body{
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    font-size: 9pt;
+    border-radius: 15px;
+}
+
+.card{
+    border: none;
+    border-radius: 15px;
+    background-color: white;
+    color: var(--var-color-text);
+    
+    
+}
+
+
+.card-body img{
+
+    background-color: rebeccapurple;
+    border-radius: 100%;
+    width: 90px;
+    height: auto;
+    margin-top: -40px;
+
+
+}
+
+h5 {
+    font-size: 16pt;
+    font-weight: 700;
+
+
+}
+
+
+h4 {
+    font-size: 16pt;
+    font-weight: 700;
+    color:rgb(90, 90, 90);
+
+
+}
+
+.pp-1{  
+    text-align: center;
+    height: 25px;
+    width: 190px;
+    border-radius: 10px;
+
+}
+
+
+
+i{
+
+    padding-left: 5px;
+}
+
+.status-profile p{
+    border-radius: 15px;
+    font-size: 12pt;
+}
+
+.icon-verificad{
+
+    color: rgb(255, 255, 255);
+}
+
+.bg-green{
+    background-color: #90ff17;
+    color: #00c16c;
+}
+
+.bg-custom-1{
+    
+    background-color: red;
+    color: #ffffff;
+
+}
+
+.bg-custom-2{
+    background-color:#b078ff91;
+
+    color:#6645f9;
+   
+    
+}
+.color-custom{
+
+    color: yellow;
+
+}
+
+
+@media (max-width: 600px) {
+    .custom-col h5{
+        font-size: 12pt;
+        
+    }
+  }
+

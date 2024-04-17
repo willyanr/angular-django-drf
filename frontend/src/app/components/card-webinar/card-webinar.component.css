@@ -1,0 +1,44 @@
+h4{
+    font-size: 12pt;
+
+
+}
+
+p{
+
+    font-size: 10pt;
+}
+
+.card{
+    border-radius: 15px;
+    border: none;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+}
+img{
+
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+h4{
+    font-size: 12pt;
+    padding-bottom: 7px;
+
+
+}
+
+
+
+.card{
+    border-radius: 15px;
+    border: none;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+}
+img{
+
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+

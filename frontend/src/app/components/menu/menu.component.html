@@ -1,0 +1,370 @@
+<div class="col custom-main">
+   <main class="ms-4 mt-4">
+      <div class="col">
+         <div class="row mt-4">
+            <div class="custom-title mb-4">
+               <h2>Veja seu menu e aproveite<br> para conferir! 😉</h2>
+            </div>
+            <div class="col-12 info">
+               <p aria-hidden="true">
+                  <span class="placeholder col-6"><i class="fa-solid fa-circle-question"></i>Saiba mais sobre como editar seu cardápio</span>
+               </p>
+            </div>
+            <form class="d-flex w-50 mb-3 custom-search" role="search">
+               <input class="form-control me-2" type="search" aria-label="Search" [(ngModel)]="inputSearchProduct" placeholder="Digite sua busca aqui" name="name-ss" />
+               <button class="btn btn-outline-success" type="submit" (click)="searchProduct()">Buscar</button>
+            </form>
+            <div class="row">
+               <div class="container mt-2">
+                  <div class="col-md-12">
+                     <div class="d-flex justify-content-end">
+                        <button class="custom-btn" data-bs-toggle="modal" data-bs-target="#category"><i class="fa-solid fa-plus"></i> Criar Categoria</button>
+                        <!--Model Create Category-->
+                        <div class="modal fade" id="category" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                           <div class="modal-dialog">
+                              <div class="modal-content custom-body">
+                                 <div class="modal-header" style="background-color: red;">
+                                    <h5 class="custom-title text-align-center">Criar nova Categoria</h5>
+                                    <button #closeButton type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close" *ngIf="close"></button>
+                                 </div>
+                                 <div class="modal-body">
+                                    <form>
+                                       <div class="input-group input-group-sm mb-3 mt-2">
+                                          <div class="input-group-prepend">
+                                             <span class="input-group-text" id="inputGroup-sizing-sm">Nome da Categoria <i class="bi bi-plus"></i> </span>
+                                          </div>
+                                          <input type="text" class="form-control custom-input" [(ngModel)]="inputName" name="name" aria-label="Name" aria-describedby="inputGroup-sizing-sm" placeholder="Digite o nome da nova categoria" />
+                                       </div>
+                                       <div class="col">
+                                          <div class="card card-margin mt-4">
+                                             <div class="card-header no-border d-flex justify-content-end">
+                                                <a href="#" class="btn custom-btn">NOVO</a>
+                                             </div>
+                                             <div class="card-body pt-0">
+                                                <div class="widget-49">
+                                                   <div class="widget-49-title-wrapper">
+                                                      <div class="widget-49-date-primary">
+                                                         <i class="fa-solid fa-burger" style="color: #ff0000;"></i>
+                                                      </div>
+                                                      <div class="widget-49-meeting-info">
+                                                         <span class="widget-49-pro-title" style="font-size: 14pt;"><strong>{{inputName}}</strong></span>
+                                                         <span class="widget-49-meeting-time">Nova categoria</span>
+                                                      </div>
+                                                   </div>
+                                                   <ol class="widget-49-meeting-points">
+                                                      <li class="widget-49-meeting-item"><i class="fa-solid fa-circle-info" style="color: #fd3f3f;"></i><span>Verifique o nome</span></li>
+                                                      <li class="widget-49-meeting-item"><i class="fa-solid fa-bowl-food" style="color: #ff0000;"></i><span>Vincule um produto com a nova categoria</span></li>
+                                                      <li class="widget-49-meeting-item"><i class="fa-solid fa-xmark" style="color: #ff0000;"></i><span>Ao excluir uma categoria, todos os produtos vinculados a ela também serão removidos.</span></li>
+                                                   </ol>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="d-flex justify-content-center">
+                                          <button type="submit" class="btn custom-btn mb-2 align-items" (click)="createCategoryMenu()">Salvar Categoria</button>
+                                       </div>
+                                    </form>
+                                 </div>
+                              </div><!-- End Model Create Category-->
+                           </div>
+                        </div>
+                        <button class="custom-btn-border" data-bs-toggle="modal" data-bs-target="#create-product"><i class="fa-solid fa-plus"></i> Criar Produto</button>
+                        <!--Model Create Product-->
+                        <div class="modal fade" id="create-product" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                           <div class="modal-dialog">
+                              <div class="modal-content custom-body">
+                                 <div class="modal-header" style="background-color: rgb(255, 3, 3);">
+                                    <button #closeButton type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close" *ngIf="close"></button>
+                                 </div>
+                                 <div class="modal-body">
+                                    <form>
+                                       <div class="input-group input-group-sm mb-3 mt-2">
+                                          <div class="input-group-prepend">
+                                             <span class="input-group-text custom-i" id="inputGroup-sizing-sm">Digite o nome do Produto<i class="bi bi-plus"></i> </span>
+                                          </div>
+                                          <input (click)="clearFields()" type="text" class="form-control custom-input" [(ngModel)]="inputNameProduct" name="name-as" aria-label="Name" aria-describedby="inputGroup-sizing-sm" />
+                                       </div>
+                                       <div class="col">
+                                          <div class="card card-margin">
+                                             <div class="card-header no-border d-flex justify-content-end">
+                                                <a href="#" class="btn custom-btn">NOVO</a>
+                                             </div>
+                                             <div class="card-body pt-0">
+                                                <div class="widget-49">
+                                                   <div class="widget-49-title-wrapper">
+                                                      <div class="widget-49-date-primary">
+                                                         <i class="fa-solid fa-burger" style="color: #ff0000;"></i>
+                                                      </div>
+                                                      <div class="widget-49-meeting-info">
+                                                         <span class="widget-49-pro-title" style="font-size: 14pt;"><strong>{{inputNameProduct}}</strong></span>
+                                                         <span class="widget-49-meeting-time">Selecione a Categoria</span>
+                                                         <div class="">
+                                                            <i class="fa-solid fa-chevron-right" style="color: #ff0000;"></i>
+                                                            <select class="form-select custom-select mb-3" size="3" aria-label="Size 3 select example" [(ngModel)]="categorySelect" name="a">
+                                                            <option [ngClass]="'mb-1'" *ngFor="let category of category$|async" [value]="category.id">{{category.name}}</option>
+                                                            </select>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <div class="row g-3 align-items-center custom-a">
+                                                      <div class="col-auto">
+                                                         <label for="inputPassword6" class="col-form-label"> <i class="fa-solid fa-sack-dollar" style="color: #c0c0c0;"></i> Valor</label>
+                                                      </div>
+                                                      <div class="col-auto">
+                                                         <input type="number" id="inputNumber" class="form-control" aria-describedby="passwordHelpInline" [(ngModel)]="inputNumber" name="input-number">
+                                                      </div>
+                                                      <div class="row g-3 align-items-center custom-input mt-0">
+                                                         <div class="col-auto">
+                                                            <label for="inputPassword6" class="col-form-label"> <i class="fa-solid fa-arrow-turn-down" style="color: #c0c0c0;"></i> Custo</label>
+                                                         </div>
+                                                         <div class="col-auto">
+                                                            <input id="input-number" class="custom-input" type="number" id="inputCost" class="form-control" aria-describedby="passwordHelpInline" [(ngModel)]="inputCost" name="input-number">
+                                                         </div>
+                                                      </div>
+                                                      <div class="d-flex flex-column mt-4">
+                                                         <p class="custom-p">Valor: {{ inputNumber | currency:'BRL':'symbol':'1.2-2' }} <i class="fa-solid fa-coins ms-2" style="color: #ffffff; font-size:9pt;"></i></p>
+                                                         <p class="custom-p">Custo: {{ inputCost | currency:'BRL':'symbol':'1.2-2' }} <i class="fa-solid fa-percent ms-2" style="color: #ffffff;"></i></p>
+                                                      </div>
+                                                      <ol class="mt-3 widget-49-meeting-points">
+                                                         <li class="widget-49-meeting-item"><i class="fa-solid fa-circle-info" style="color: #fd3f3f;"></i><span>Verifique o nome;</span></li>
+                                                         <li class="widget-49-meeting-item"><i class="fa-solid fa-bowl-food" style="color: #ff0000;"></i><span>Vincule o produto com uma categoria;</span></li>
+                                                      </ol>
+                                                   </div>
+                                                </div>
+                                                <div class="d-flex justify-content-center mt-4">
+                                                   <button type="button" class="btn-confirm" (click)="createProductMenu()">Confirmar</button>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </form>
+                                 </div>
+                              </div>
+                           </div>
+                        </div> <!-- End Model Create Product-->
+                     </div>
+                  </div>
+                  @if (inputSearchProduct) {
+                  <div class="col-md-12" *ngFor="let item of filteredProducts">
+                     <h3 class="mb-4">Produto Encontrado: </h3>
+                     <span class="ml-3 ms-2 custom-category"><i class="fa-solid fa-bowl-food" style="color:white; margin-right: 10px;"></i><strong>{{ item.category_name}}</strong></span>
+                     <div class="col-12 custom mt-4 mb-5">
+                        <div>
+                           <ul class="list list-inline">
+                              <li class="d-flex justify-content-between mb-3 bg-light">
+                                 <div class="col-10 col-xxl-6 d-flex flex-row align-items-center">
+                                    <i class="fa fa-check-circle checkicon"></i>
+                                    <div class="ml-2 ms-3">
+                                       <h6 class="mb-0 custom-name">{{ item.name }}</h6>
+                                       <div class="d-flex flex-row mt-1 text-black-50 date-time">
+                                          <div class="info-menu">
+                                             <i class="fa-solid fa-dollar-sign"></i>
+                                             <span class="ml-2 ms-2 custom-price">Valor: {{ item.price | currency:'BRL':'symbol':'1.2-2' }}</span>
+                                             <p class="mb-1 mt-1"><i class="fa-solid fa-arrow-trend-down" style="color: #ff0000;"></i> Custo total: {{ item.cost | currency:'BRL':'symbol':'1.2-2' }}</p>
+                                             <p class="mb-1"><i class="fa-solid fa-dollar-sign" style="color: #FFD43B;"></i> Valor ideal: {{ item.price | currency:'BRL':'symbol':'1.2-2' }}</p>
+                                             <p class="mb-0" *ngIf="item.profitMargin !== undefined && item.profitMargin > 0"><i class="fa-solid fa-sack-dollar" style="color: #0bb714;"></i> Margem de Lucro (%): {{item.profitMargin| number: '1.1-2'}}% </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col">
+                                    <div class="form-check form-switch p-0">
+                                       <input class="form-check-input custom-switch" type="checkbox" role="switch" id="flexSwitchCheckValue" [(ngModel)]="item.status" (click)="onCheckboxChange($event, item)" />
+                                       <label class="form-check-label" [for]="'flexSwitchCheckChecked'">{{ item.status ? 'Ativo' : 'Desativado' }}</label>
+                                    </div>
+                                 </div>
+                                 <div class="d-flex flex-row align-items-center">
+                                    <div class="d-flex flex-column mr-2">
+                                       <div class="profile-image">
+                                          <div class=" d-flex pt-1 ms-5 custom-o">
+                                             <span class="ms-2 custom-span" data-bs-toggle="modal" data-bs-target="#edit"><i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i></span>
+                                             <span class="ms-3 custom-span" data-bs-toggle="mymodal" data-bs-target="#confirm-delete"><i class="fa-solid fa-xmark" style="color: #ffffff;"></i></span>
+                                             <p class="ms-auto"></p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </li>
+                           </ul>
+           
+                      
+                          
+                        
+                        </div>
+                     </div>
+                  </div>
+                  }@else {
+                  <div *ngFor="let category of categories; index as i;" class="a">
+                     <span class="ml-3 ms-2 custom-category"><i class="fa-solid fa-bowl-food" style="color:white; margin-right: 10px;"></i><strong>{{ categoryNamesMap[category] }}</strong></span>
+                     <button type="button" class="custom-button close" data-bs-toggle="modal"
+                        data-bs-target="#confirm">Excluir</button>
+                     <!-- Delete category confirm Modal -->
+                     <div class="modal fade" id="confirm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                           <div class="modal-content">
+                              <div class="modal-header">
+                                 <h1 class="modal-title fs-5" id="exampleModalLabel">Deseja remover?</h1>
+                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                 <span class="custom-span-d">
+                                    <p>Remover</p>
+                                 </span>
+                                 <p> Categoria:
+                                 </p>
+                                 <h5>{{categoryNamesMap[category]}}</h5>
+                                 <p><i class="fa-regular fa-circle-question" style="color: #ff0000;"></i> Produtos na categoria: <span>12</span></p>
+                              </div>
+                              <div class="modal-footer">
+                                 <button type="button" class="btn custom-btn-border" data-bs-dismiss="modal">Fechar</button>
+                                 <button type="button" class="btn custom-btn">Confirmar</button>
+                              </div>
+                           </div>
+                        </div><!-- End Delete category confirm Modal -->
+                     </div>
+                     <div class="col-12 custom mt-4 mb-5">
+                        <div *ngFor="let item of menu$ | async; index as i;">
+                           <ul class="list list-inline">
+                              <li class="d-flex justify-content-between mb-3 bg-light" *ngIf="item.category === category">
+                                 <div class="col-10 col-xxl-6 d-flex flex-row align-items-center">
+                                    <i class="fa fa-check-circle checkicon"></i>
+                                    <div class="ml-2 ms-3">
+                                       <h6 class="mb-0 custom-name">{{ item.name }}</h6>
+                                       <div class="d-flex flex-row mt-1 text-black-50 date-time">
+                                          <div class="info-menu">
+                                             <i class="fa-solid fa-dollar-sign"></i>
+                                             <span class="ml-2 ms-2 custom-price">Valor: {{ item.price | currency:'BRL':'symbol':'1.2-2' }}</span>
+                                             <p class="mb-1 mt-1"><i class="fa-solid fa-arrow-trend-down" style="color: #ff0000;"></i> Custo total: {{ item.cost | currency:'BRL':'symbol':'1.2-2' }}</p>
+                                             <p class="mb-1"><i class="fa-solid fa-dollar-sign" style="color: #FFD43B;"></i> Valor ideal: {{ item.price | currency:'BRL':'symbol':'1.2-2' }}</p>
+                                             <p class="mb-0" *ngIf="item.profitMargin !== undefined && item.profitMargin > 0"><i class="fa-solid fa-sack-dollar" style="color: #0bb714;"></i> Margem de Lucro (%): {{item.profitMargin| number: '1.1-2'}}% </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col">
+                                    <div class="form-check form-switch p-0">
+                                       <input class="form-check-input custom-switch" type="checkbox" role="switch" id="flexSwitchCheckValue" [(ngModel)]="item.status" (click)="onCheckboxChange($event, item)" />
+                                       <label class="form-check-label" [for]="'flexSwitchCheckChecked' + i">{{ item.status ? 'Ativo' : 'Desativado' }}</label>
+                                    </div>
+                                 </div>
+                                 <div class="d-flex flex-row align-items-center">
+                                    <div class="d-flex flex-column mr-2">
+                                       <div class="profile-image">
+                                          <div class=" d-flex pt-1 ms-5 custom-o">
+                                             <span class="ms-2 custom-span" data-bs-toggle="modal" data-bs-target="#confirm-edit"><i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i></span>
+                                             <span class="ms-3 custom-span" data-bs-toggle="modal" data-bs-target="#confirm-delete"><i class="fa-solid fa-xmark" style="color: #ffffff;"></i></span>
+                                             <p class="ms-auto"></p>
+                                          </div> 
+                                       </div>
+                                    </div>
+                                 </div>
+                              </li>
+                              <!-- Delete Product confirm Modal -->
+                           <div class="modal fade" id="confirm-delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog modal-sm">
+                                 <div class="modal-content" style="border-radius: 25px;">
+                                    <div class="modal-header">
+                                       <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body" style="font-size: 10pt;">
+                                       <span class="custom-span-d">
+                                          <p>Remover</p>
+                                       </span>
+                                       <p class="mb-0">Produto:</p>
+                                       <h6>{{ item.name }}</h6>
+                                       <p><i class="fa-regular fa-circle-question" style="color: #ff0000; font-size:9pt;"></i> {{item.category_name}}</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                       <button type="button" class="btn custom-btn-border close" data-bs-dismiss="modal">Cancelar</button>
+                                       <button type="button" id="close" class="btn custom-btn" (click)="deleteProduct(item.id!)">Confirmar</button>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div> <!-- End Delete Product confirm Modal -->
+                           </ul>
+                           
+                           <!--Model Edit-->
+                           <div class="modal fade" id="confirm-edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog">
+                                 <div class="modal-content" style="border-radius: 25px;">
+                                    <div class="modal-header">
+                                       <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body" style="font-size: 10pt;">
+                                       <span class="custom-span-d">
+                                          <p>Editar</p>
+                                       </span>
+                                       <p class="mb-0">Produto:</p>
+                                       <input type="text" class="form-control mb-2" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="item.name">
+                                       <p class="mb-0">Valor:</p>
+                                       <input type="text" class="form-control mb-2" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="item.price">
+                                       <p class="mb-0">Custo:</p>
+                                       <input type="text" class="form-control mb-2" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="item.cost">
+                                       <p><i class="fa-regular fa-circle-question" style="color: #ff0000; font-size:9pt;"></i> Trocar categoria?</p>
+                                       <div class="widget-49-meeting-info ms-2">
+                                          
+                                          <span class="widget-49-meeting-time">Selecione a Categoria</span>
+                                          <div class="">
+                                             <i class="fa-solid fa-chevron-right" style="color: #ff0000;"></i>
+                                             <select class="form-select custom-select mb-3" size="3" aria-label="Size 3 select example" [(ngModel)]="categorySelect" name="a">
+                                             <option [ngClass]="'mb-1'" *ngFor="let category of category$|async" [value]="category.id">{{category.name}}</option>
+                                             </select>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                       <button type="button" class="btn custom-btn-border close" data-bs-dismiss="modal">Cancelar</button>
+                                       <button type="button" id="close" class="btn custom-btn" (click)="updateProduct(item)">Confirmar</button>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div><!--End Model Edit-->
+                        </div>
+                     </div>
+                  </div>
+                  }
+               </div>
+            </div>
+         </div>
+      </div>
+   </main>
+</div>
+@if(alertaSucesso){
+<div *ngIf="alertaSucesso" class="alert-container">
+   <div class="alert alert-sucess" role="alert">
+      <div class="d-flex align-items-center" role="alert">
+         <div class="d-flex align-items-center justify-content-center">
+            <div class="row">
+               <div class="col-2">
+                  <i id="sucess" class="bi bi-check-circle"></i>
+               </div>
+               <div class="col-8">
+                  <h5 id="error" class="mb-0">Sucesso:</h5>
+                  <p class="mt-2 w-50 mb-0">{{feedBack}}</p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+} @if (alertError) {
+<div *ngIf="alertError" class="alert-container">
+   <div class="alert alert-error" role="alert">
+      <div class="d-flex align-items-center" role="alert">
+         <div class="d-flex align-items-center justify-content-center">
+            <div class="row">
+               <div class="col-2">
+                  <i id="alert" class="bi bi-slash-circle mr-2"></i>
+               </div>
+               <div class="col-7">
+                  <h5 id="alert" class="mb-0">Erro</h5>
+                  <p class="text-light mt-2 w-100">{{feedBack}}</p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+}

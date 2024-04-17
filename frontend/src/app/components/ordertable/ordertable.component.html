@@ -1,0 +1,70 @@
+<div class="row">
+  <div class="col-4 custom-title ms-3">
+    <h2>Meus Pedidos 🔥</h2>
+  </div>
+
+</div>
+<div class="custom-table">
+    
+    <div class="mb-2 d-flex justify-content-between align-items-center pt-2 ms-2 custom-filter">
+        
+        <div class="position-relative custom-placeholder">
+            <span class="position-absolute search"><i class="fa fa-search"></i></span>
+            <input class="form-control w-100  bg-custom" placeholder="Busque o pedido">
+        </div>
+        
+        <div class="px-2">
+            
+          <span><a href="." class="custom-link">Fechar Pedido <i class="fa-solid fa-arrow-right"></i></a> </span>
+       
+        </div>
+        
+    </div>
+    <div class="table-responsive">
+    <table class="table table-responsive table-borderless ms-3 fixed-header">
+        
+      <thead class="fixed-header">
+        <tr class="bg-custom" >
+   
+          <th scope="col" width="5%"><input class="form-check-input" type="checkbox"></th>
+          <th scope="col" width="20%">Data</th>
+          <th scope="col" width="20%">Status</th>
+          <th scope="col" width="20%">Atendimento</th>
+          <th scope="col" width="20%">Pedidos</th>
+        
+        </tr>
+      </thead>
+  <tbody>
+    <tr *ngFor="let data of data$ |async">
+    
+      <td scope="row"><input class="form-check-input" type="checkbox"></td>
+      <td>{{data.date | date}}</td>
+      @if (data.status == 'Aberto') {
+      <div>
+        <i class="fa-solid fa-stopwatch" style="color: red;"></i>
+        <span class="ms-1">{{ data.status }}</span>
+    </div>}@else {
+      <div>
+        <i class="fa-solid fa-circle-check" ></i>
+        <span class="ms-1">{{ data.status }}</span>
+    </div>
+
+
+
+
+
+
+
+    }
+      <td><i class="fa-solid fa-receipt"></i><span class="custom-span text-light">{{tableFromCarddash}}</span></td>
+      <td style="font-size: 9pt;">{{data.description}}</td>
+
+    </tr>
+    
+   
+  </tbody>
+</table>
+  
+  </div>
+    
+</div>

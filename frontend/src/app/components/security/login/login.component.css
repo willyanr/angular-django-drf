@@ -1,0 +1,64 @@
+.container{
+    margin: 0 auto;
+
+
+
+}
+
+.card-custom{
+
+    margin-top: 150px;
+
+}
+
+.custom-text{
+    color: white;
+    background-color: red;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    margin-left: 200px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.custom-text h2{
+    font-weight: 700;
+    font-size: 36pt;
+    letter-spacing: -3px;
+
+
+}
+
+button{
+
+    border: none;
+    border-radius: 25px;
+    background-color: red;
+
+}
+button:hover{
+    background-color: #ffffff;
+    color: red;
+    border: solid 1px red;
+}
+
+
+img{
+    width: auto;
+    height: 500px;
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
+
+
+}
+
+input{
+
+    background-color: rgb(134, 102, 102);
+    border: none;
+    border-radius: 20px;
+}
+
+.teste{
+    margin-left: 15px;
+
+}

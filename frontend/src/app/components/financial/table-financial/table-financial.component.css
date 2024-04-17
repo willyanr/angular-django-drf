@@ -1,0 +1,187 @@
+button, select, input {
+
+  font-size: 17px;
+}
+.quiz-window {
+  left: 0;
+  right: 0;
+  background-color: rgb(255, 255, 255);
+  margin: auto;
+  border-radius: 15px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  max-height: 290px;
+  text-overflow: ellipsis;
+  border: none;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    
+    
+}
+
+.quiz-window-title {
+  font-size: 26px;
+}
+
+.quiz-window-body {
+  background: var(--var-color-card);
+  
+}
+.guiz-awards-row {
+  margin:0;
+  padding: 10px 40px;
+  list-style: none;
+}
+.guiz-awards-row:after {
+  content: '';
+  display: table;
+  clear:both;
+
+}
+.table{
+  overflow:scroll;
+  text-overflow: ellipsis;
+  list-style: none;
+  color: white;
+  
+}
+
+.guiz-awards-row li {
+  display:inline-block;
+  vertical-align: top;
+  float: left;
+
+}
+.guiz-awards-header {
+  text-align: center;
+  padding: 20px 40px;
+}
+.guiz-awards-star, .guiz-awards-track, .guiz-awards-time,
+.guiz-awards-header-star, .guiz-awards-header-track, .guiz-awards-header-time{
+  min-width: 54px;
+  text-align: center;
+  width: 16%;
+}
+.guiz-awards-title {
+  width: 40%;
+  min-width: 160px;
+  font-size: 18px;
+  font-weight: normal;
+  padding-top: 3px;
+}
+.guiz-awards-header-title {
+  width: 40%;
+  min-width: 160px;
+}
+.guiz-awards-subtitle {
+
+  font-size: 14px;
+  font-weight: 300;
+}
+.guiz-awards-track, .guiz-awards-time {
+  width: 22%;
+  min-width: 80px;
+  font-size: 18px;
+  line-height: 45px
+}
+.guiz-awards-header-track, .guiz-awards-header-time {
+  width: 22%;
+  min-width: 80px;
+}
+.guiz-awards-track .null, .guiz-awards-time .null {
+  color: #ffffff;
+}
+.star {
+  display:block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid  #ffffff;
+  background: #d6d6d6;  
+}
+.goldstar {
+  border-color: #4c8193;
+  background: #14b1bf73;  
+}
+.silverstar {
+  border-color: #557e3a;
+  background: #66931f;  
+}
+.bronzestar {
+  border-color: #998247;
+  background: #aa984b;  
+}
+.rhodiumstar {
+  border-color: #743a7f;
+  background: #a0409d;
+}
+.platinumstar {
+  border-color: #10393b;
+  background: #2b5770;
+}
+
+.guiz-awards-buttons {
+  background: #fff;
+  text-align: center;
+  padding: 20px 0;
+}
+.guiz-awards-but-back {
+  display:inline-block;
+  background: none;
+  border: 1px solid #61a3e5;
+  border-radius: 21px;
+  padding: 7px 40px 7px 20px;
+  color: #61a3e5;
+  font-size: 17px;
+  cursor:pointer;
+  transition: all .3s ease;
+}
+
+.guiz-awards-but-back:hover {
+  background: #61a3e5;
+  color: #fff;
+}
+
+.guiz-awards-but-back i {
+  font-size: 26px;
+  line-height: 17px;
+  margin-right: 20px;
+  position: relative;
+  top: 2px;
+}
+
+
+
+/* Style the scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #303030;
+}
+
+::-webkit-scrollbar-thumb {
+  background:red;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+.custom-th-1{
+  background-color: rgb(44, 44, 44);
+  
+  
+  
+
+}
+tbody, td, tfoot, th, thead, tr{
+  border: none;
+
+
+}

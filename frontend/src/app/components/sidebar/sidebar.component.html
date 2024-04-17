@@ -1,0 +1,87 @@
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 custom-sidebar" *ngFor="let profile of profile$|async">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100 custom-v">
+                <div  class="col-12 custom-user d-flex justify-content-center align-items-center mt-4">
+                    <img [src]="profile.avatar" alt="">
+
+                </div>
+                <div class="profile">
+                    <div class="col-12 d-flex justify-content-center align-items-center">
+                        <h5 class="text-light mt-3" style="font-weight: 600;">{{profile.company}}</h5>
+                    </div>
+                    <div class="col-12 d-flex justify-content-center align-items-center">
+                        <span class="user-status-s">Premium</span>
+                    </div>
+                    <div class="col-12 d-flex justify-content-center align-items-center">
+                        <span class="user-status mt-2">Ativo</span>
+                    </div>
+                </div>
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                    <li class="nav-item">
+                        <a [routerLink]="'/home'" class="nav-link align-middle px-0" [routerLinkActive]="'active'">
+                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="'/caixa'" data-bs-toggle="collapse" class="nav-link px-0 align-middle" [routerLinkActive]="'active'">
+                            <i class="fa-solid fa-hand-holding-dollar"></i> <span class="ms-1 d-none d-sm-inline">Caixa</span> 
+                        </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="'/pedidos'" class="nav-link px-0 align-middle" [routerLinkActive]="'active'">
+                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Pedidos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="'/financeiro'" class="nav-link px-0 align-middle" [routerLinkActive]="'active'">
+                            <i class="fa-solid fa-chart-line" style="color: #ff2600;"></i> <span class="ms-1 d-none d-sm-inline">Financeiro</span>
+                        </a>
+                    </li>
+                   
+                    <li>
+                        <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle" [routerLinkActive]="'active'">
+                            <i class="fa-solid fa-headset"></i> <span class="ms-1 d-none d-sm-inline">Suporte</span> 
+                        </a>
+                        <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
+                            <li class="w-100">
+                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 1</a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 2</a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 3</a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 4</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a [routerLink]="'/menu'" class="nav-link px-0 align-middle" [routerLinkActive]="'active'">
+                            <i class="fa-solid fa-utensils"></i> <span class="ms-1 d-none d-sm-inline">Cardápio</span> 
+                        </a>
+                    </li>
+                </ul>
+                <hr>
+                <div class="dropdown pb-5">
+                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="assets/img/avatar.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                        <span class="d-none d-sm-inline mx-1">Preferências</span>
+                    </a>
+                    <ul class="dropdown-menu text-small shadow">
+                        <li><a class="dropdown-item" href="#">Suporte</a></li>
+                        <li><a class="dropdown-item" href="#">Perfil</a></li>
+                        <li><a class="dropdown-item" href="#">Configurações</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" (click)="logout()">Sair</a></li>
+                    </ul>
+                </div>
+                
+                </div>
+            </div>
+        </div>
+    </div>

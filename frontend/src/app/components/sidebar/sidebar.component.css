@@ -1,0 +1,153 @@
+.custom-sidebar{
+    width: 100%;
+    background-color: red;
+    padding-left: 0;
+    border-radius: 40px;
+    margin-top: 15px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    min-height: 100%;
+
+   
+}
+@media (max-width: 600px) {
+    .custom-sidebar{
+        border-radius: 0;
+        margin: 0;
+        height: auto;
+
+
+    }
+    .profile{
+        display: none;
+    }
+    .nav-link.active{
+        display: none;
+
+    }
+    img{
+        display: none;
+        
+      
+      }
+  }
+
+.custom-sidebar a{
+  color: rgb(116, 116, 116);
+  font-size: 12pt;
+  margin-left: 20px;
+  margin-top: 30px;
+  
+
+}
+.custom-sidebar ul{
+  color: rgb(211, 210, 210);
+  margin-top: 50px;
+ 
+  
+
+}
+.custom-sidebar i{
+    color: rgb(255, 255, 255);
+    margin-right: 20px;
+    
+  
+  }
+  
+
+    
+  @media (max-width: 600px) {
+    .custom-sidebar ul{
+        position: fixed;
+        margin: 0;
+        
+      }
+  }
+
+  .dropdown-item.active {
+    background-color: rgb(212, 37, 37);
+    color: rgb(255, 0, 0);
+    border-radius: 25px;
+    padding-right: 50px;
+    border-top-right-radius: 0px;
+}
+
+.dropdown-item.active i, span {
+  color: white;
+}
+
+.custom-user img{
+  border-radius: 100%;
+  width: 100px;
+  height: 100px;
+  margin: 0;
+  border: solid 3px white;
+
+}
+
+.user-status{
+  color: #d4d4d4;
+  background-color: #fdfd084b;
+  padding: 2px 20px;
+  font-weight: 600;
+  border-radius: 15px;
+  font-size: 10pt;
+
+
+}
+
+.user-status-s{
+  background-color: #fdfd084b;
+  padding: 2px 20px;
+  color: rgb(253, 253, 253);
+  font-weight: 600;
+  border-radius: 15px;
+  font-size: 10pt;
+
+
+}
+
+.row{
+  height: 100%;
+  overflow: hidden;
+
+
+
+
+
+
+
+}
+.container-fluid{
+  height: 100%;
+
+}
+
+li a{
+
+  font-size: 18px !important;
+}
+
+ul li i{
+  background-color: rgb(255, 255, 255);
+  color: red;
+  padding: 8px;
+  border-radius: 100%;
+  font-size: 16px !important;
+}
+
+
+
+
+
+.nav-link.active {
+  background-color: rgb(202, 36, 24);
+  border-radius: 25px;
+  padding: 5px 20px;
+  width: 230px;  
+}
+
+.nav-link.active span {
+  color: rgb(255, 255, 255); 
+}

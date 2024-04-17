@@ -1,0 +1,33 @@
+{
+  "name": "angular-localstorage",
+  "version": "1.1.5",
+  "description": "Provide read/write access to browsers' localStorage.",
+  "author": "Jan Oetjen <oetjenj@gmail.com>",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joetjen/angular-localstorage.git"
+  },
+  "keywords": [
+    "angular",
+    "storage",
+    "localstorage",
+    "webstorage",
+    "browser",
+    "client-side"
+  ],
+  "bugs": {
+    "url": "https://github.com/joetjen/angular-localstorage/issues"
+  },
+  "jspm": {
+    "shim": {
+      "angular-localstorage": {
+        "deps": ["angular"]
+      }
+    }
+  }
+}

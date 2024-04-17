@@ -1,0 +1,263 @@
+<div class="row">
+   <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content custom-body ">
+            <div class="modal-header" style="background-color:red;">
+               <h5 class="custom-title">Registrar pedido! 🔥</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+               <form (ngSubmit)="cadastrarVenda()">
+                  <select class="form-select mb-3" name="box"[(ngModel)]="box">
+                     <option style="color: black;" *ngFor="let box of data$ |async" [value]="box.id">{{ box.name }}</option>
+                     </select>
+                  <div class="input-group mb-3">
+                     <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Selecione a data</span>
+                     </div>
+                     <input type="date" class="form-control" [(ngModel)]="date" name="data" aria-label="Data" aria-describedby="basic-addon1">
+                  </div>
+                  <div class="input-group input-group-sm mb-3">
+                     <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Quantidade <i class="bi bi-plus"></i> </span>
+                     </div>
+                     <input type="text" class="form-control" [(ngModel)]="quantity" name="quantidade" aria-label="Quantidade" aria-describedby="inputGroup-sizing-sm">
+                  </div>
+                  <div class="form-group">
+                     <label for="menu">Selecione os Itens:</label>
+                     <select class="form-select mb-3" id="menu" name="menu"[(ngModel)]="selectedMenuItem">
+                       <option *ngFor="let menu of menuItems$ | async" [value]="menu.id">{{ menu.name }} ({{ menu.category }})</option>
+                     </select>
+                   </div>
+                   <div class="form-group">
+                     <label for="mesa">Selecione a Mesa:</label>
+                     <select class="form-select mb-3" id="mesa" name="mesa" [(ngModel)]="table">
+                       <option *ngFor="let transaction of transations$ | async" [value]="transaction.table">{{ transaction.table }}</option>
+                     </select>
+                     
+                   </div>
+                   <button type="submit" class="btn custom-button mb-2">Cadastrar Venda</button>
+                 </form>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="col-xl-3 col-lg-6 col-md-12 col-12">
+      <div class="card mb-4">
+         <div >
+            <div class="card-body ">
+               <span class="fs-6 text-uppercase fw-semibold">Total vendas</span>
+               <div class="mt-2 d-flex justify-content-between align-items-center">
+                  <div class="lh-1 " >
+                     <div>
+                        <h2 class="h1 fw-bold p-0">{{ total | currency: 'BRL' }}</h2>
+                        <div *ngIf="sales$ | async as sales">
+                           <p > <i class="fa-solid fa-bowl-food"></i> Pedidos: <span class="info">{{salesLength}}</span>
+                           </p>
+                        </div>
+                        <p> <i class="fa-solid fa-xmark"></i> Cancelamentos</p>
+                     </div>
+                     <span class="custom-span">
+                        <p>Atinja 20 para o próximo nível 🔥</p>
+                     </span>
+                  </div>
+                  <div>
+                     <span class="bg-light-primary icon-shape icon-xl rounded-3 text-dark-primary icon" data-bs-toggle="modal" data-bs-target="#myModal"><i class="bi bi-plus-circle-fill"></i></span>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="col-xl-3 col-lg-6 col-md-12 col-12">
+      <!-- Card -->
+      <div class="card mb-4">
+         <div >
+            <div class="card-body">
+               <div class="row">
+                  <div class="col-7 col-xxl-7">
+                     <span class="fs-6 text-uppercase fw-semibold" style="color: rgba(53, 52, 52, 0.705);">Meu Caixa</span>
+                  </div>
+                  <div class="col-5 col-xxl-5 text-end">
+                     <span><a *ngFor="let box of data$ | async" href="http://127.0.0.1:8000/api/fechar-caixa/{{box.id}}/{{box.total_balance}}" class="custom-end-box" click="endBox()">Fechar Caixa <i class="fa-solid fa-arrow-right"></i></a> </span>
+                  </div>
+               </div>
+                  <div class="mt-2 d-flex justify-content-between align-items-center">
+                     <div class="lh-1">
+                        <div *ngFor="let box of data$ |async">
+                           <h2 class="h1 fw-bold p-0">{{ box.total_balance | currency: 'BRL' }}</h2>
+                           <p  id="values"> <i class="fa-solid fa-circle-info"></i> Valor inicial: R$   {{box.value_start}}</p>
+                           <p  id="values"> <i class="fa-regular fa-calendar"></i> Data: {{box.date | date}}</p>
+                        </div>
+                        <span class="custom-span">
+                           <p>Atinja 20 para o próximo nível 🔥</p>
+                        </span>
+                     </div>
+                     <div>
+                        <span class="bg-light-primary icon-shape icon-xl rounded-3 text-dark-primary icon" data-bs-toggle="modal" data-bs-target="#caixa"><i class="bi bi-plus-circle-fill"></i></span>
+                     </div>
+                  </div>
+            </div>
+         </div>
+         <div class="modal fade" id="caixa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+               <div class="modal-content custom-body">
+                  <div class="modal-header" style="background-color:red;">
+                     <h5 class="custom-title">Abrir Caixa! 🔥</h5>
+                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                     <form (ngSubmit)="startBox()">
+                        <div class="input-group mb-3">
+                           <div class="input-group-prepend">
+                              <span class="input-group-text" type="date" id="basic-addon1">Data</span>
+                           </div>
+                           <input type="date" class="form-control" [(ngModel)]="date" name="data" aria-label="Data" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                           <div class="input-group-prepend">
+                              <span class="input-group-text" id="inputGroup-sizing-sm">Nome do Caixa <i class="bi bi-plus"></i> </span>
+                           </div>
+                           <input type="text" class="form-control" [(ngModel)]="name" name="name" aria-label="Name" aria-describedby="inputGroup-sizing-sm">
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                           <div class="input-group-prepend">
+                              <span class="input-group-text" id="inputGroup-sizing-sm">Valor inicial<i class="bi bi-plus"></i> </span>
+                           </div>
+                           <input type="text" class="form-control" [(ngModel)]="value_start" name="quantidade" aria-label="Quantidade" aria-describedby="inputGroup-sizing-sm" >
+                        </div>
+                        <button type="submit" class="btn custom-button mb-2">Abrir Caixa</button>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+
+ 
+      <div class="col-xl-3 col-lg-6 col-md-12 col-12">
+         <!-- Card -->
+         <div class="card mb-4">
+            <!-- Card Body -->
+            <div class="card-body">
+               <div class="row">
+                  <div class="col-9 col-xxl-9">
+                     <span style="color: rgba(53, 52, 52, 0.705);" class="fs-6 text-uppercase fw-semibold">Ticket Médio</span>
+                  </div>
+                  <div class="col-3 col-xxl-3 text-end">
+                     <a tabindex="0" class="custom" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="O que é ticket médio?" data-bs-content="Ticket médio é todas suas vendas dividas pelo número totais de pedidos"><i class="fa-regular fa-circle-question"></i></a>
+                  </div>
+               </div>
+               <div class="mt-2 d-flex justify-content-between align-items-center">
+                  <div class="lh-1">
+                     <h2 class="h1 fw-bold mb-1">{{ticket_m | currency: 'BRL'}}</h2>
+                     <span></span>
+                  </div>
+                  <div>
+                     <span class="bg-light-success icon-shape icon-xl rounded-3 text-dark-success"><i class="fa-solid fa-hand-holding-dollar c-icon"></i></span>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-xl-3 col-lg-6 col-md-12 col-12">
+         <!-- Card -->
+         <div class="card mb-4">
+            <!-- Card Body -->
+            <div class="card-body">
+               <div class="row">
+                  <div class="col-9 col-xxl-9">
+                     <span class="fs-6 text-uppercase fw-semibold" style="color: rgba(53, 52, 52, 0.705);">TOTAL PEDIDOS</span>
+                  </div>
+                  <div class="col-3 col-xxl-3 text-end">
+                     <a tabindex="0" class="custom" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Dismissible popover" data-bs-content="And here's some amazing content. It's very engaging. Right?"><i class="fa-regular fa-circle-question"></i></a>
+                  </div>
+               </div>
+               <div class="mt-2 d-flex justify-content-between align-items-center">
+                  <div class="lh-1">
+                     <h2 class="h1 fw-bold mb-1">{{salesLength}}</h2>
+                     <span></span>
+                  </div>
+                  <div>
+                     <span class="bg-light-info icon-shape icon-xl rounded-3 text-dark-info"><i class="fa-solid fa-bowl-food c-icon"></i></span>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   @if(alertaSucesso){
+   <div *ngIf="alertaSucesso" class="alert-container">
+      <div class="alert alert-bg-custom" role="alert">
+         <div class="d-flex align-items-center" role="alert">
+            <div class="d-flex align-items-center justify-content-center">
+               <div class="row">
+                  <div class="col-2">
+                     <i id="sucess"class="bi bi-check-circle"></i>
+                  </div>
+                  <div class="col-7">
+                     <h5 id="sucess" class="mb-0">Venda Realizada com<br><strong>Sucesso! 🎉</strong></h5>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   }
+   @if (alertError) {
+      <div *ngIf="alertError" class="alert-container">
+         <div class="alert alert-custom" role="alert">
+            <div class="d-flex align-items-center" role="alert">
+               <div class="d-flex align-items-center justify-content-center">
+                  <div class="row">
+                     <div class="col-2">
+                        <i id="error" class="bi bi-slash-circle mr-2"></i>
+                     </div>
+                     <div class="col-7">
+                        <h5 id="error" class="mb-0">Erro ao registrar venda</h5>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   }
+   @if(alertaSucessoBox){
+      <div *ngIf="alertaSucessoBox" class="alert-container">
+         <div class="alert alert-bg-custom" role="alert">
+            <div class="d-flex align-items-center" role="alert">
+               <div class="d-flex align-items-center justify-content-center">
+                  <div class="row">
+                     <div class="col-2">
+                        <i id="sucess"class="bi bi-check-circle"></i>
+                     </div>
+                     <div class="col-7">
+                        <h5 id="sucess" class="mb-0">Seu caixa foi<br><strong>Aberto com Sucesso! 🎉</strong></h5>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      }
+      @if (alertErrorBox) {
+         <div *ngIf="alertErrorBox" class="alert-container">
+            <div class="alert alert-custom" role="alert">
+               <div class="d-flex align-items-center" role="alert">
+                  <div class="d-flex align-items-center justify-content-center">
+                     <div class="row">
+                        <div class="col-2">
+                           <i id="error" class="bi bi-slash-circle mr-2"></i>
+                        </div>
+                        <div class="col-7">
+                           <h5 id="error" class="mb-0">Erro ao abrir Caixa</h5>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      }

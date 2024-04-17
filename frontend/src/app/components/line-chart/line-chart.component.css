@@ -1,0 +1,58 @@
+.card{
+    border: none;
+    background-color: #ffffff;
+    color: rgb(180, 178, 178);
+    border-radius: 15px;
+    box-shadow: rgba(149, 157, 165, 0.055) 0px 8px 24px;
+
+   
+
+
+}
+.card-body{
+
+    border-radius: 15px;
+    background-color: #ffffff;
+    color: rgb(180, 178, 178);
+    box-shadow: rgba(149, 157, 165, 0.267) 0px 8px 24px;
+
+
+}
+
+
+
+.custom-col{
+    border-radius: 15px;
+    border: none;
+
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+i{
+    color: rgb(255, 109, 47);
+   
+}
+.text-custom{
+    color: rgb(93, 212, 34);
+    font-weight: 800;
+    width: 100px;
+    height: auto;
+
+
+}
+
+.custom-icons{
+    
+    color: rgb(93, 212, 34);
+
+}
+
+.custom-coin i{
+    color: rgb(93, 212, 34);
+}
+
+h2{
+    color: rgb(139, 138, 138);
+    font-size: 19pt;
+    padding-bottom: 10px;
+}
