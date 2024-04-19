@@ -3,18 +3,12 @@
 :root {
     --var-color-text:rgb(180, 178, 178);
     --var-color-card:#dddbdb;
-   
     --var-color-red: #cccccc;
     --form-check-input-bg:  #8c00ff; 
     --form-check-input-checked-color: #ffffff; 
 
     
   }
-
-
-
-
-
 
 *{
     

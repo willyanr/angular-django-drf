@@ -141,7 +141,7 @@ export class MenuComponent {
     };
     this.FinancialService.createCategory(newCategory).subscribe({
       next: _ => {
-        // Sucess
+        // Success
         this.feedBack = 'Categoria criada com sucesso!';
         this.alertaSucesso = true;
         this.closeModal();
@@ -163,7 +163,26 @@ export class MenuComponent {
   }
 
 deleteCategoryMenu(id: number) {
-  this.FinancialService.deleteCategory(id).subscribe(_ => this.getMenu)
+  this.FinancialService.deleteCategory(id).subscribe({
+    next:_ => {
+      this.closeModal();
+      this.feedBack = 'Categoria excluída com sucesso'
+      this.alertaSucesso = true;
+      setTimeout(() => {
+        this.alertaSucesso = false;
+      }, 4000);
+    },
+    error: _ => {
+      // Error
+      this.feedBack = 'Ocorreu um erro ao deletar categoria';
+      this.alertError = true;
+      this.closeModal();
+      setTimeout(() => {
+        this.alertError = false;
+      }, 4000);
+    }
+  })
+  this.closeModal();
 }
 
 createProductMenu() {

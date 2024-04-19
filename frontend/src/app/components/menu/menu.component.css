@@ -773,10 +773,16 @@ text-align: right;
 }
 
 .custom-span{
-  background-color: rgb(255, 0, 0);
+  background-color: transparent;
   padding: 5px 20px;
   border-radius: 15px;
   cursor: pointer;
+  border: solid 1px red;
+
+}
+
+.custom-span i{
+  color: red !important;
 
 }
 .custom-span-d p{
@@ -803,6 +809,12 @@ text-align: right;
   color: white !important;
 
 
+
+
+}
+.btn:hover{
+  background-color: red;
+  color: white !important;
 
 
 }

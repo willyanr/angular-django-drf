@@ -12,7 +12,7 @@
             </div>
             <form class="d-flex w-50 mb-3 custom-search" role="search">
                <input class="form-control me-2" type="search" aria-label="Search" [(ngModel)]="inputSearchProduct" placeholder="Digite sua busca aqui" name="name-ss" />
-               <button class="btn btn-outline-success" type="submit" (click)="searchProduct()">Buscar</button>
+               <button class="btn" type="submit" (click)="searchProduct()">Buscar</button>
             </form>
             <div class="row">
                <div class="container mt-2">
@@ -177,8 +177,8 @@
                                     <div class="d-flex flex-column mr-2">
                                        <div class="profile-image">
                                           <div class=" d-flex pt-1 ms-5 custom-o">
-                                             <span class="ms-2 custom-span" data-bs-toggle="modal" data-bs-target="#edit"><i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i></span>
-                                             <span class="ms-3 custom-span" data-bs-toggle="mymodal" data-bs-target="#confirm-delete"><i class="fa-solid fa-xmark" style="color: #ffffff;"></i></span>
+                                             <span class="ms-2 custom-span" data-bs-toggle="modal" data-bs-target="#edit"><i class="fa-solid fa-pen-to-square" style="color: #ff0000;"></i></span>
+                                             <span class="ms-3 custom-span" data-bs-toggle="mymodal" data-bs-target="#confirm-delete"><i class="fa-solid fa-xmark" style="color: #ff0000;"></i></span>
                                              <p class="ms-auto"></p>
                                           </div>
                                        </div>
@@ -186,6 +186,7 @@
                                  </div>
                               </li>
                            </ul>
+                           
            
                       
                           
@@ -194,73 +195,82 @@
                      </div>
                   </div>
                   }@else {
-                  <div *ngFor="let category of categories; index as i;" class="a">
-                     <span class="ml-3 ms-2 custom-category"><i class="fa-solid fa-bowl-food" style="color:white; margin-right: 10px;"></i><strong>{{ categoryNamesMap[category] }}</strong></span>
-                     <button type="button" class="custom-button close" data-bs-toggle="modal"
-                        data-bs-target="#confirm">Excluir</button>
-                     <!-- Delete category confirm Modal -->
-                     <div class="modal fade" id="confirm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                           <div class="modal-content">
-                              <div class="modal-header">
-                                 <h1 class="modal-title fs-5" id="exampleModalLabel">Deseja remover?</h1>
-                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                              </div>
-                              <div class="modal-body">
-                                 <span class="custom-span-d">
-                                    <p>Remover</p>
-                                 </span>
-                                 <p> Categoria:
-                                 </p>
-                                 <h5>{{categoryNamesMap[category]}}</h5>
-                                 <p><i class="fa-regular fa-circle-question" style="color: #ff0000;"></i> Produtos na categoria: <span>12</span></p>
-                              </div>
-                              <div class="modal-footer">
-                                 <button type="button" class="btn custom-btn-border" data-bs-dismiss="modal">Fechar</button>
-                                 <button type="button" class="btn custom-btn">Confirmar</button>
-                              </div>
+                  
+                     @for (category of categories; track $index ) {
+                        <div class="a">
+                           <div>
+                              <span class="ml-3 ms-2 custom-category"><i class="fa-solid fa-bowl-food" style="color:white; margin-right: 10px;"></i><strong>{{categoryNamesMap[category] }}</strong></span>
+                              <button type="button" class="custom-button close" data-bs-toggle="modal"
+                                 [attr.data-bs-target]="'#confirm-delete-category'+ $index">Excluir</button>
                            </div>
-                        </div><!-- End Delete category confirm Modal -->
-                     </div>
-                     <div class="col-12 custom mt-4 mb-5">
-                        <div *ngFor="let item of menu$ | async; index as i;">
+                           <!-- Delete Product confirm Modal -->
+                           <div class="modal fade" [id]="'confirm-delete-category' + $index" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog modal-sm">
+                                 <div class="modal-content" style="border-radius: 25px;">
+                                    <div class="modal-header">
+                                       <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+                                       <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body" style="font-size: 10pt;">
+                                       <span class="custom-span-d">
+                                          <p>Remover</p>
+                                       </span>
+                                       <p class="mb-0">Produto:</p>
+                                       <h6>{{ categoryNamesMap[category]  }}</h6>
+                                       <p><i class="fa-regular fa-circle-question" style="color: #ff0000; font-size:9pt;"></i> Ao excluir uma categoria, todos os produtos associados a categoria serão deletados!</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                       <button type="button" class="btn custom-btn-border close" data-bs-dismiss="modal">Cancelar</button>
+                                       <button type="button" id="close" class="btn custom-btn" (click)="deleteCategoryMenu(category)">Confirmar</button>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div> <!-- End Delete Product confirm Modal -->
+                           <div class="col-12 custom mt-4 mb-5">
+                           @for (item of menu$|async; track $index ) {
                            <ul class="list list-inline">
-                              <li class="d-flex justify-content-between mb-3 bg-light" *ngIf="item.category === category">
-                                 <div class="col-10 col-xxl-6 d-flex flex-row align-items-center">
-                                    <i class="fa fa-check-circle checkicon"></i>
-                                    <div class="ml-2 ms-3">
-                                       <h6 class="mb-0 custom-name">{{ item.name }}</h6>
-                                       <div class="d-flex flex-row mt-1 text-black-50 date-time">
-                                          <div class="info-menu">
-                                             <i class="fa-solid fa-dollar-sign"></i>
-                                             <span class="ml-2 ms-2 custom-price">Valor: {{ item.price | currency:'BRL':'symbol':'1.2-2' }}</span>
-                                             <p class="mb-1 mt-1"><i class="fa-solid fa-arrow-trend-down" style="color: #ff0000;"></i> Custo total: {{ item.cost | currency:'BRL':'symbol':'1.2-2' }}</p>
-                                             <p class="mb-1"><i class="fa-solid fa-dollar-sign" style="color: #FFD43B;"></i> Valor ideal: {{ item.price | currency:'BRL':'symbol':'1.2-2' }}</p>
-                                             <p class="mb-0" *ngIf="item.profitMargin !== undefined && item.profitMargin > 0"><i class="fa-solid fa-sack-dollar" style="color: #0bb714;"></i> Margem de Lucro (%): {{item.profitMargin| number: '1.1-2'}}% </p>
-                                          </div>
+                           @if (item.category === category) {
+                           <li class="d-flex justify-content-between mb-3 bg-light" >
+                              <div class="col-10 col-xxl-6 d-flex flex-row align-items-center">
+                                 <i class="fa fa-check-circle checkicon"></i>
+                                 <div class="ml-2 ms-3">
+                                    <h6 class="mb-0 custom-name">{{ item.name }}</h6>
+                                    <div class="d-flex flex-row mt-1 text-black-50 date-time">
+                                       <div class="info-menu">
+                                          <i class="fa-solid fa-dollar-sign"></i>
+                                          <span class="ml-2 ms-2 custom-price">Valor: {{ item.price | currency:'BRL':'symbol':'1.2-2' }}</span>
+                                          <p class="mb-1 mt-1"><i class="fa-solid fa-arrow-trend-down" style="color: #ff0000;"></i> Custo total: {{ item.cost | currency:'BRL':'symbol':'1.2-2' }}</p>
+                                          <p class="mb-1"><i class="fa-solid fa-dollar-sign" style="color: #FFD43B;"></i> Valor ideal: {{ item.price | currency:'BRL':'symbol':'1.2-2' }}</p>
+                                          <p class="mb-0" *ngIf="item.profitMargin !== undefined && item.profitMargin > 0"><i class="fa-solid fa-sack-dollar" style="color: #0bb714;"></i> Margem de Lucro (%): {{item.profitMargin| number: '1.1-2'}}% </p>
                                        </div>
                                     </div>
                                  </div>
-                                 <div class="col">
-                                    <div class="form-check form-switch p-0">
-                                       <input class="form-check-input custom-switch" type="checkbox" role="switch" id="flexSwitchCheckValue" [(ngModel)]="item.status" (click)="onCheckboxChange($event, item)" />
-                                       <label class="form-check-label" [for]="'flexSwitchCheckChecked' + i">{{ item.status ? 'Ativo' : 'Desativado' }}</label>
-                                    </div>
+                              </div>
+                              <div class="col">
+                                 <div class="form-check form-switch p-0">
+                                    <input class="form-check-input custom-switch" type="checkbox" role="switch" id="flexSwitchCheckValue" [(ngModel)]="item.status" (click)="onCheckboxChange($event, item)" />
+                                    <label class="form-check-label" [for]="'flexSwitchCheckChecked' + $index">{{ item.status ? 'Ativo' : 'Desativado' }}</label>
                                  </div>
-                                 <div class="d-flex flex-row align-items-center">
-                                    <div class="d-flex flex-column mr-2">
-                                       <div class="profile-image">
-                                          <div class=" d-flex pt-1 ms-5 custom-o">
-                                             <span class="ms-2 custom-span" data-bs-toggle="modal" data-bs-target="#confirm-edit"><i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i></span>
-                                             <span class="ms-3 custom-span" data-bs-toggle="modal" data-bs-target="#confirm-delete"><i class="fa-solid fa-xmark" style="color: #ffffff;"></i></span>
-                                             <p class="ms-auto"></p>
-                                          </div> 
+                              </div>
+                              
+                              <div class="d-flex flex-row align-items-center">
+                                 <div class="d-flex flex-column mr-2">
+                                    <div class="profile-image">
+                                       <div class=" d-flex pt-1 ms-5 custom-o">
+                                          <span class="ms-2 custom-span" data-bs-toggle="modal" [attr.data-bs-target]="'#confirm-edit-' + $index">
+                                          <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
+                                          </span>
+                                          <span class="ms-3 custom-span" data-bs-toggle="modal" [attr.data-bs-target]="'#confirm-delete-' + $index">
+                                          <i class="fa-solid fa-xmark" style="color: #ffffff;"></i>
+                                          </span>
+                                          <p class="ms-auto"></p>
                                        </div>
                                     </div>
                                  </div>
-                              </li>
+                              </div>
+                           
                               <!-- Delete Product confirm Modal -->
-                           <div class="modal fade" id="confirm-delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal fade" [id]="'confirm-delete-' + $index" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                               <div class="modal-dialog modal-sm">
                                  <div class="modal-content" style="border-radius: 25px;">
                                     <div class="modal-header">
@@ -273,7 +283,7 @@
                                        </span>
                                        <p class="mb-0">Produto:</p>
                                        <h6>{{ item.name }}</h6>
-                                       <p><i class="fa-regular fa-circle-question" style="color: #ff0000; font-size:9pt;"></i> {{item.category_name}}</p>
+                                       <p><i class="fa-regular fa-circle-question" style="color: #ff0000; font-size:9pt;"></i> Categoria: <br> <strong>{{item.category_name}}</strong></p>
                                     </div>
                                     <div class="modal-footer">
                                        <button type="button" class="btn custom-btn-border close" data-bs-dismiss="modal">Cancelar</button>
@@ -282,10 +292,11 @@
                                  </div>
                               </div>
                            </div> <!-- End Delete Product confirm Modal -->
-                           </ul>
-                           
+                           </li>} 
+                           </ul>}
+                           @for (item of menu$|async; track $index){
                            <!--Model Edit-->
-                           <div class="modal fade" id="confirm-edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                           <div class="modal fade" [id]="'confirm-edit-' + $index" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                               <div class="modal-dialog">
                                  <div class="modal-content" style="border-radius: 25px;">
                                     <div class="modal-header">
@@ -320,10 +331,10 @@
                                     </div>
                                  </div>
                               </div>
-                           </div><!--End Model Edit-->
-                        </div>
-                     </div>
-                  </div>
+                           </div> }<!--End Model Edit-->
+                     
+                           </div>
+                     </div>}
                   }
                </div>
             </div>
@@ -331,6 +342,8 @@
       </div>
    </main>
 </div>
+
+
 @if(alertaSucesso){
 <div *ngIf="alertaSucesso" class="alert-container">
    <div class="alert alert-sucess" role="alert">
