@@ -13,7 +13,7 @@ import { LineChartComponent } from './components/line-chart/line-chart.component
 import { MenuComponent } from './components/menu/menu.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
-
+import { Router, NavigationEnd } from '@angular/router';
 
 
 
@@ -55,6 +55,9 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 })
 
 export class AppComponent{
+  constructor(private router: Router) {}
 
-
+  isLoginPage(): boolean {
+    return this.router.url === '/login' || this.router.url === '/home' || this.router.url ==='';
+  }
 }

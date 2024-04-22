@@ -10,6 +10,7 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 
 
 export const routes: Routes = [
+
   { path: 'home', component: HomepageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'caixa', component: DashboardComponent },

@@ -31,6 +31,7 @@ export class OrdersComponent {
   productDeactivate: modelMenu[] = [];
   totalMenu: number = 0;
   totalSales: number = 0;
+  a: boolean = true;
 
 
 

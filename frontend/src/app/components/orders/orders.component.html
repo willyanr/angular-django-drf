@@ -128,8 +128,8 @@
          </div>
        </div>
        <div class="row">
-         <div class="col-12 col-md-12 col-xxl-3">
-           <div class="custom-bg h-100 mb-2">
+         <div class="col-12 col-md-12 col-xxl-3 mb-4">
+           <div class="custom-bg h-100 mb-3">
              <ul class="list-group">
               <li class="list-group-item d-flex">
                 <div class="justify-content-start mt-4">
@@ -170,29 +170,29 @@
            </div>
          </div>
          <div class="col">
-          <div class="row">
-            <div class="col-4 custom-title ms-3">
-              <h2>Meus Pedidos 🔥</h2>
+            <div class="row">
+              <div class="col-7 col-md-4 col-xxl-3 custom-title ms-3">
+                <h2>Meus Pedidos 🔥</h2>
+              </div>
             </div>
-          
-          </div>
-          <div class="custom-table">
-              
+            <div class="row">
+              <div class="col">
+                
+              </div>
+            </div>
+            <div class="custom-table">
               <div class="mb-2 d-flex justify-content-between align-items-center pt-2 ms-2 custom-filter">
-                  
-                  <div class="position-relative custom-placeholder">
-                      <span class="position-absolute search"><i class="fa fa-search"></i></span>
-                      <input class="form-control w-100  bg-custom" placeholder="Busque o pedido">
-                  </div>
-                  
-                  <div class="px-2">
-                      
-                    <span><a href="." class="custom-link">Fechar Pedido <i class="fa-solid fa-arrow-right"></i></a> </span>
-                 
-                  </div>
+                <div class="position-relative custom-placeholder">
+                  <span class="position-absolute search"><i class="fa fa-search"></i></span>
+                  <input class="form-control w-100  bg-custom" placeholder="Busque o pedido">
+                </div>
+                <div class="px-2 custom-btn-link">
+                  <span><a href="." class="custom-link">Fechar Pedido <i class="fa-solid fa-arrow-right"></i></a> </span>
+                </div>
                   
               </div>
               <div class="table-responsive">
+           
               <table class="table table-responsive table-borderless ms-3 fixed-header">
                   
                 <thead class="fixed-header">
@@ -203,40 +203,31 @@
                     <th scope="col" width="20%">Status</th>
                     <th scope="col" width="20%">Atendimento</th>
                     <th scope="col" width="20%">Pedidos</th>
+                    <th scope="col" width="20%">Tipo</th>
                   
                   </tr>
                 </thead>
-            <tbody>
-              @for (transaction of data$ |async; track $index) {
-            
-              <tr>
-              
-                <td scope="row"><input class="form-check-input" type="checkbox"></td>
-                <td>{{transaction.date | date}}</td>
-                @if (transaction.status == 'Aberto') {
-                <div>
-                  <i class="fa-solid fa-stopwatch" style="color: red;"></i>
-                  <span class="ms-1">{{ transaction.status }}</span>
-              </div>}@else {
-                <div>
-                  <i class="fa-solid fa-circle-check" ></i>
-                  <span class="ms-1">{{ transaction.status }}</span>
-              </div>
-              }
-                <td><i class="fa-solid fa-receipt"></i><span class="custom-span text-light"></span></td>
-                <td style="font-size: 9pt;">{{transaction.description}}</td>
-          
-              </tr>}
-              
-             
-            </tbody>
+               @for (transaction of data$ |async; track $index; let i = $count) {
+                <tbody>
+                  <tr>
+                    <td scope="row"><input class="form-check-input" type="checkbox"></td>
+                    <td>{{transaction.date | date}}</td>
+                    <div>
+                      <i class="fa-solid fa-stopwatch" style="color: red;"></i>
+                      <span class="ms-1">{{ transaction.status }}</span>
+                    </div>
+                    <div>
+                      <i class="fa-solid fa-circle-check" ></i>
+                      <span class="ms-1">{{ transaction.status }}</span>
+                    </div>
+                    <td><i class="fa-solid fa-receipt"></i><span class="custom-span text-light"></span></td>
+                    <td style="font-size: 9pt;">{{transaction.description}}</td>
+                  </tr>
+                </tbody>}
           </table>
-            
-            </div>
-              
+          </div>
           </div>
         </div>
        </div>
-       
      </div>
     
