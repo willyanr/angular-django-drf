@@ -32,7 +32,7 @@
                    <div class="form-group">
                      <label for="mesa">Selecione a Mesa:</label>
                      <select class="form-select mb-3" id="mesa" name="mesa" [(ngModel)]="table">
-                       <option *ngFor="let transaction of transations$ | async" [value]="transaction.table">{{ transaction.table }}</option>
+                       <option *ngFor="let transaction of transations$ | async" [value]="transaction.type_order">{{ transaction.type_order }}</option>
                      </select>
                      
                    </div>

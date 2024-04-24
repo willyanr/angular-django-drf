@@ -47,8 +47,8 @@
                               <div class="lh-1">
                                 <div class="mt-2 d-flex">
                                   <div class="mb-4 p-0 custom-text">
-                                    <p class="">Delivery: <span class="ms-2 badge badge-secondary">12</span></p>
-                                    <p class="">Mesa:  <span class="ms-2 badge badge-secondary">36</span></p>
+                                    <p class="">Delivery: <span class="ms-2 badge badge-secondary">{{orderDelivery.length}}</span></p>
+                                    <p class="">Mesa:  <span class="ms-2 badge badge-secondary">{{orderTable.length}}</span></p>
                                   </div>
                                 </div>
                               </div>
@@ -134,20 +134,20 @@
               <li class="list-group-item d-flex">
                 <div class="justify-content-start mt-4">
                   <p>Filtre sua Busca</p>
-                  <input class="form-check-input me-1" type="checkbox" value="" id="firstCheckbox" >
-                  <label class="form-check-label" for="firstCheckbox">Pedidos Abertos</label>
+                  <input class="form-check-input me-1" type="checkbox" value="" id="firstCheckbox" checked [(ngModel)]="isCheckedAll">
+                  <label class="form-check-label" for="firstCheckbox">Pedidos Abertos<span class="badge text-bg-secondary ms-3">{{orderOpen.length}}</span></label>
                 </div>
                 <div class="justify-content-end">
                   <i class="fa-solid fa-clock-rotate-left" style="color: #ff0000;"></i>
                 </div>
               </li>
               <li class="list-group-item">
-                <input class="form-check-input me-1" type="checkbox" value="" id="secondCheckbox">
-                <label class="form-check-label" for="secondCheckbox">Pedidos Fechados</label>
+                <input class="form-check-input me-1" type="checkbox" value="" id="secondCheckbox" [(ngModel)]="isCheckedClose">
+                <label class="form-check-label" for="secondCheckbox">Pedidos Fechados<span class="badge text-bg-secondary ms-3">{{orderClose.length}}</span></label>
               </li>
               <li class="list-group-item">
-                <input class="form-check-input me-1" type="checkbox" value="" id="thirdCheckbox">
-                <label class="form-check-label" for="thirdCheckbox">Pedidos Cancelados</label>
+                <input class="form-check-input me-1" type="checkbox" value="" id="thirdCheckbox" [(ngModel)]="isCheckedCanceled">
+                <label class="form-check-label" for="thirdCheckbox">Pedidos Cancelados<span class="badge text-bg-secondary ms-3">{{orderCanceled.length}}</span></label>
               </li>
             </ul>
              <div class="row">
@@ -156,14 +156,17 @@
                   <p>Tipo de pedido:</p>
                   <div class="custom-mobile">
                     <div class="btn-group mt-0" role="group" aria-label="Basic radio toggle button group">
-                    <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
-                    <label class="btn btn-outline-primary" for="btnradio1">Todos</label>
-                    <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio2">Mesa</label>
-                    <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio3">Delivery</label>
+                      <input type="checkbox" class="btn-check" name="btnradio" id="btnradio1" value="" checked [(ngModel)]="isCheckedAll" [(ngModel)]="isCheckedClose" [(ngModel)]="isCheckedCanceled">
+                      <label class="btn btn-outline-primary" for="btnradio1">Todos</label>
+                      <input type="checkbox" class="btn-check" name="btnradio" id="btnradio1" value=""  [(ngModel)]="isCheckedTable">
+                      <label class="btn btn-outline-primary" for="btnradio2">Mesa</label>
+                      <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" value=""  [(ngModel)]="isCheckedDelivery">
+                      <label class="btn btn-outline-primary" for="btnradio3">Delivery</label>
+                    </div>
+                    
                   </div>
-                </div>
+                  
+                
               </div>
               </div>
             </div>
@@ -182,12 +185,12 @@
             </div>
             <div class="custom-table">
               <div class="mb-2 d-flex justify-content-between align-items-center pt-2 ms-2 custom-filter">
-                <div class="position-relative custom-placeholder">
+                <div class="position-relative custom-placeholder a">
                   <span class="position-absolute search"><i class="fa fa-search"></i></span>
                   <input class="form-control w-100  bg-custom" placeholder="Busque o pedido">
                 </div>
-                <div class="px-2 custom-btn-link">
-                  <span><a href="." class="custom-link">Fechar Pedido <i class="fa-solid fa-arrow-right"></i></a> </span>
+                <div class="px-2 custom-btn-link justify-content-end">
+                  <span><a href="." class="custom-link" id="btn-close-order">Fechar Pedido <i class="fa-solid fa-arrow-right"></i></a> </span>
                 </div>
                   
               </div>
@@ -199,31 +202,200 @@
                   <tr class="bg-custom" >
              
                     <th scope="col" width="5%"><input class="form-check-input" type="checkbox"></th>
-                    <th scope="col" width="20%">Data</th>
+                    <th scope="col" width="10%">Tipo</th>
                     <th scope="col" width="20%">Status</th>
-                    <th scope="col" width="20%">Atendimento</th>
-                    <th scope="col" width="20%">Pedidos</th>
-                    <th scope="col" width="20%">Tipo</th>
+                    <th scope="col" width="15%" id="time-th">Tempo Pedido</th>
+                    <th scope="col" width="30%">Pedidos</th>
+                    <th scope="col" width="20%">Data</th>
                   
                   </tr>
                 </thead>
-               @for (transaction of data$ |async; track $index; let i = $count) {
                 <tbody>
-                  <tr>
-                    <td scope="row"><input class="form-check-input" type="checkbox"></td>
-                    <td>{{transaction.date | date}}</td>
-                    <div>
-                      <i class="fa-solid fa-stopwatch" style="color: red;"></i>
-                      <span class="ms-1">{{ transaction.status }}</span>
-                    </div>
-                    <div>
-                      <i class="fa-solid fa-circle-check" ></i>
-                      <span class="ms-1">{{ transaction.status }}</span>
-                    </div>
-                    <td><i class="fa-solid fa-receipt"></i><span class="custom-span text-light"></span></td>
-                    <td style="font-size: 9pt;">{{transaction.description}}</td>
-                  </tr>
-                </tbody>}
+                  <tbody>
+                    
+                      @if (isCheckedAll) {
+                        @for (item of orderOpen; track $index) {
+                      <tr>
+                        <td scope="row"><input class="form-check-input" type="checkbox"></td>
+                        <td>{{ item.date | date }}</td>
+                        <td>
+                   
+                            <div>
+                              <i class="fa-solid fa-stopwatch" style="color: red;"></i>
+                              <span class="ms-1">{{ item.status }}</span>
+                            </div>
+                          
+                            
+                            
+                        </td>
+                        <td><i class="fa-solid fa-receipt"></i><span class="custom-span text-light"></span></td>
+                        <td style="font-size: 9pt;">{{ item.menu_item }}</td>
+                        <td>{{item.type_order}}</td>
+
+                      </tr>}}
+                      @else if (isCheckedClose) {
+                        @for (item of orderClose; track $index) {
+                          <tr>
+                            <td scope="row"><input class="form-check-input" type="checkbox"></td>
+                            <td class="badge" id="badge-table">{{item.type_order}}</td>
+                            
+                            <td>
+                              @switch (item.status) {
+                                @case ('Aberto') {
+                                  <div>
+                                    <i class="fa-solid fa-stopwatch" style="color: red;"></i>
+                                    <span class="ms-1">{{ item.status }}</span>
+                                  </div>
+    
+                                }
+                                @case ('Fechado') {
+                                  <div>
+                                    <i class="fa-solid fa-circle-check" style="color: #d6d6d6;"></i>
+                                    <span class="ms-1">{{ item.status }}</span>
+                                  </div>
+                                }
+                                @case ('Cancelado') {
+                                  <div>
+                                    <i class="fa-solid fa-ban" style="color: #ff0000;"></i>
+                                    <span class="ms-1">{{ item.status }}</span>
+                                  </div>
+                                
+                                }
+                              }
+                          
+                                
+                                
+                            </td>
+                            <td><i class="fa-solid fa-receipt"></i><span class="custom-span text-light"></span></td>
+                            <td style="font-size: 9pt;">{{ item.menu_item }}</td>
+                            <td>{{ item.date | date }}</td>
+    
+                          </tr>}}
+                      @else if (isCheckedCanceled) {
+                        @for (item of orderCanceled; track $index) {
+                          <tr>
+                            <td scope="row"><input class="form-check-input" type="checkbox"></td>
+                            <td class="badge" id="badge-table">{{item.type_order}}</td>
+                            
+                            <td>
+                              @switch (item.status) {
+                                @case ('Aberto') {
+                                  <div>
+                                    <i class="fa-solid fa-stopwatch" style="color: red;"></i>
+                                    <span class="ms-1">{{ item.status }}</span>
+                                  </div>
+    
+                                }
+                                @case ('Fechado') {
+                                  <div>
+                                    <i class="fa-solid fa-circle-check" style="color: #d6d6d6;"></i>
+                                    <span class="ms-1">{{ item.status }}</span>
+                                  </div>
+                                }
+                                @case ('Cancelado') {
+                                  <div>
+                                    <i class="fa-solid fa-ban" style="color: #ff0000;"></i>
+                                    <span class="ms-1">{{ item.status }}</span>
+                                  </div>
+                                
+                                }
+                              }
+                          
+                                
+                                
+                            </td>
+                            <td><i class="fa-solid fa-receipt"></i><span class="custom-span text-light"></span></td>
+                            <td style="font-size: 9pt;">{{ item.menu_item }}</td>
+                            <td>{{ item.date | date }}</td>
+    
+                          </tr>}}
+                      @else if (isCheckedDelivery) {
+                        @for (item of orderDelivery; track $index) {
+                      <tr>
+                        <td scope="row"><input class="form-check-input" type="checkbox"></td>
+                        <td>{{ item.date | date }}</td>
+                        <td>
+                   
+                            <div>
+                              <i class="fa-solid fa-ban" style="color: #ff0000;"></i>
+                              <span class="ms-1">{{ item.status }}</span>
+                            </div>
+                          
+                            
+                            
+                        </td>
+                        <td><i class="fa-solid fa-receipt"></i><span class="custom-span text-light"></span></td>
+                        <td style="font-size: 9pt;">{{ item.menu_item }}</td>
+                        <td>aa</td>
+
+                      </tr>}}
+                      @else {
+                        @for (item of data$|async; track $index) {
+                          <tr>
+                            <td scope="row"><input class="form-check-input" type="checkbox"></td>
+                            <td class="badge" id="badge-table">{{item.type_order}}</td>
+                            
+                            <td>
+                              @switch (item.status) {
+                                @case ('OPEN') {
+                                  <div>
+                                    <i class="fa-solid fa-stopwatch" style="color: red;"></i>
+                                    <span class="ms-1">Aberto</span>
+                                  </div>
+    
+                                }
+                                @case ('CLOSED') {
+                                  <div>
+                                    <i class="fa-solid fa-circle-check" style="color: #d6d6d6;"></i>
+                                    <span class="ms-1">Fechado</span>
+                                  </div>
+                                }
+                                @case ('PREPARATION') {
+                                  <div>
+                                    <i class="fa-brands fa-free-code-camp" style="color: #ff0000;"></i>
+                                    <span class="ms-1">Preparando</span>
+                                  </div>
+                                
+                                }
+                                @case ('READY') {
+                                  <div>
+                                    <i class="fa-solid fa-circle-check" style="color: #ff0000;"></i>
+                                    <span class="ms-1">Pronto</span>
+                                  </div>
+                                
+                                }
+
+                                @case ('CANCELED') {
+                                  <div>
+                                    <i class="fa-solid fa-circle-check" style="color: #ff0000;"></i>
+                                    <span class="ms-1">Pronto</span>
+                                  </div>
+                                
+                                }
+                              }
+                            
+                                
+                                
+                            </td>
+                            <td>{{ item.date | date: 'HH:mm:ss' }}</td>
+
+                            <td>
+                              <i class="fa-solid fa-receipt"></i>
+                              <span class="custom-span text-light">{{ minutesPassed }}:{{ secondsPassed }}</span>
+                            </td>
+                            
+                            <td style="font-size: 9pt;">{{ item.menu_item }}</td>
+                            <td>{{ item.date | date }}</td>
+    
+                          </tr>}
+
+                      }
+           
+           
+                       
+          
+                  </tbody>
+  
           </table>
           </div>
           </div>

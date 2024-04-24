@@ -3,7 +3,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { modelFinancial, modelBox, modelMenu, modelCategory, modelMenuItem, modelTransations } from '../../../models/financial.model'; 
+import { modelFinancial, modelBox, modelMenu, modelCategory, modelMenuItem, modelTransations, modelOrders } from '../../../models/financial.model'; 
 import { FinancialService } from '../../../service/financial.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Observable, never, Subject } from 'rxjs';
@@ -36,7 +36,7 @@ export class CarddashComponent implements OnInit {
   categories$ = new Observable<modelCategory[]>;
   menuItems$ = new Observable<modelMenuItem[]>;
 
-  transations$ = new Observable<modelTransations[]>;
+  transations$ = new Observable<modelOrders[]>;
   alertaSucesso = false;
   alertaSucessoBox = false;
   alertError = false;
@@ -73,6 +73,7 @@ export class CarddashComponent implements OnInit {
     this.Sales();
     this.Transations();
     this.tableSelect();
+    console.log('vvvvvvvv', this.sales$)
     
   }
   
@@ -194,13 +195,13 @@ Sales() {
 }
 
 Transations() {
-  this.transations$ = this.FinancialService.getTransations();
+  this.transations$ = this.FinancialService.getOrdersService(true);
   this.transations$.subscribe(transactions => {
-    this.total = transactions.reduce((total, transaction) => total + parseFloat(transaction.amount), 0);
+    this.total = transactions.reduce((total, transaction) => total + parseFloat(transaction.amount.toString()), 0);
     this.ticket_m = this.total / transactions.length;
-
   });
 }
+
 
 tableSelect(){
   this.table

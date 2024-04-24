@@ -3,7 +3,7 @@ import { FinancialService } from './../../service/financial.service';
 import { Component } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { modelBox, modelTransations } from '../../models/financial.model';
+import { modelBox, modelOrders, modelTransations } from '../../models/financial.model';
 import { threadId } from 'worker_threads';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -34,7 +34,7 @@ isChecked: boolean = false;
 
 tableFromCarddash: string = 'Mesa';
   status = '';
-  data$ = new Observable<modelTransations[]>;
+  data$ = new Observable<modelOrders[]>;
   
 
   constructor(private FinancialService: FinancialService){}
@@ -48,7 +48,7 @@ tableFromCarddash: string = 'Mesa';
 
   
   TestBed(){
-    this.data$ = this.FinancialService.getTransations();
+    this.data$ = this.FinancialService.getOrdersService(true);
     this.data$.subscribe(data => {
     });
   }

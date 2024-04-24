@@ -259,14 +259,6 @@ p{
 
 }
 
-.custom-title{
-  font-size: 28pt;
-  font-weight: 800;
-  letter-spacing: -1px;
-  color: #ffffff;
-  margin: auto;
-  background-color: rgba(255, 94, 0, 0.781);
-}
 
 .modal-header{
   border-top-left-radius: 25px;
@@ -402,12 +394,18 @@ li{
     color:rgb(94, 212, 34);
 }
 
+.table-responsive{
+  overflow-x: hidden !important;
+
+}
 .custom-table{
     background-color: white;
     border-radius: 15px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     max-height: 400px;
-    overflow: auto;
+    overflow-y: auto;
+    
+
 
 
 
@@ -435,10 +433,11 @@ li{
 }
 
 
-tbody{
-    font-size: 10pt;
+tbody td{
+    font-size: 12px;
     font-weight: 500;
-    color: #a5a5a5;
+    
+    
 
 }
 
@@ -489,7 +488,7 @@ td{
   }
 
 .custom-title{
-    background-color: rgba(255, 94, 0, 0.781);
+    background-color: transparent;
     font-weight: 800;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     border-top-left-radius: 25px;
@@ -502,18 +501,44 @@ td{
 
 .custom-title h2{
     font-weight:600;
-    font-size: 14px;
-    padding-top: 10px;
-    padding-left: 5px;
+    font-size: 16px;
     color: #fcfcfc;
     border-radius: 15px;
+    background-color: red;
+    margin-top: 10px;
+    width: 160px;
+    padding: 3px 8px;
 }
+
+
+
+@media (max-width: 500px) {
+  th, td {
+    font-size: 12px;
+      
+
+  }
+  #badge-table {
+    font-size: 10px;
+      
+
+  }
+  .custom-link{
+    background-color: yellow !important;
+    font-size: 12px;
+    width: 300px
+
+  }
+  .a{
+    display: none;
+  }
+}
+
 
 
 .custom{
     margin-left: -25px;
-    width: 100px;
-    
+     
 }
 
 
@@ -530,7 +555,7 @@ td{
 .fixed-header {
   position: sticky;
   top: 10;
-  color: yellow;
+  
   background-color: #fff; 
   z-index: 999; 
 }

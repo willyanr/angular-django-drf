@@ -1,7 +1,7 @@
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams  } from '@angular/common/http';
 import { Injectable } from "@angular/core";
-import { modelBox, modelFinancial, modelMenu, modelTransations, modelCategory} from '../models/financial.model';
+import { modelBox, modelFinancial, modelMenu, modelTransations, modelCategory, modelOrders} from '../models/financial.model';
 import { environment } from '../environments/environment'; 
 import { Observable } from 'rxjs';
 import { ObserversModule } from '@angular/cdk/observers';
@@ -51,8 +51,10 @@ export class FinancialService {
     }
   
   
-    getTransations(){
-      return this.httpClient.get<modelTransations[]>('http://127.0.0.1:8000/api/transactions/');
+    getOrdersService(useDateCloseFilter: boolean): Observable<modelOrders[]>{
+      let params = new HttpParams();
+      params = params.set('use_date_close_filter', useDateCloseFilter.toString());
+      return this.httpClient.get<modelOrders[]>('http://127.0.0.1:8000/api/orders/',{ params: params });
     }
     
     getTransationsDetails(transactions: modelTransations): Observable<modelTransations> {

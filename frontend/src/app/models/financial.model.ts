@@ -79,6 +79,22 @@ export interface modelTransations {
     box_name: string;
     status?:string;
     table: string;
+    delivey: boolean;
+    type_order: string;
+  }
+
+  export interface modelOrders{
+    type: string;
+    amount: number;
+    menu_item: number;
+    date: string;
+    box: number;
+    quantity: number;
+    status: string;
+    type_order: string;
+    minutesPassed?: number;
+
+
   }
   
 
