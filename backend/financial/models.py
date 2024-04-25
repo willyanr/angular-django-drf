@@ -1,13 +1,12 @@
 
-from django.dispatch import receiver
 from django.db.models import Sum
 import datetime
 from django.db import models
 from menu.models import Menu
-
+from django.utils import timezone
 from django.conf import settings
-from django.db.models.signals import post_save
-from django.dispatch import receiver
+
+
 
 class CashBox(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='cash_boxes', on_delete=models.CASCADE)
@@ -43,7 +42,59 @@ class CashBox(models.Model):
         
     
 
+class Orders(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='user', on_delete=models.CASCADE)
+    type = models.CharField(max_length=7, default='Receita')
+    date = models.DateTimeField(auto_now_add=True)
+    box = models.ForeignKey(CashBox, related_name='orders', on_delete=models.CASCADE)
+    STATUS_CHOICES = (
+        ('OPEN', 'Open'),
+        ('PREPARATION', 'In preparation'),
+        ('READY', 'Ready'),
+        ('CLOSED', 'Closed'),
 
+    )
+    status = models.CharField(max_length=11, choices=STATUS_CHOICES)
+    TYPE_ORDER_CHOICES = (
+        ('Mesa', 'Mesa'),
+        ('Delivery', 'Delivey')
+    )
+    type_order = models.CharField(max_length=10, choices=TYPE_ORDER_CHOICES)
+    open_timestamp = models.DateTimeField(blank=True, null=True)
+    preparation_timestamp = models.DateTimeField(blank=True, null=True)
+    ready_timestamp = models.DateTimeField(blank=True, null=True)
+    closed_timestamp = models.DateTimeField(blank=True, null=True)
+    total = models.DecimalField(max_digits=5, decimal_places=2, default=0)
+    
+    def calculate_total(self):
+        total = sum(item.menu_item.price * item.quantity for item in self.items.all())
+        self.total = total
+        self.save()  # Salva o pedido após atualizar o total
+        return total
+    
+    def calculate_time_order(self):
+        if self.closed_timestamp:
+            time = self.closed_timestamp - self.open_timestamp
+            return time
+        else:
+            return None
+
+   
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Orders, related_name='items', on_delete=models.CASCADE)
+    menu_item = models.ForeignKey(Menu, on_delete=models.CASCADE) 
+    quantity = models.IntegerField(default=1)
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        self.order.calculate_total() 
+
+    def __str__(self):
+        return f"{self.quantity}x {self.menu_item.name}"
+    
+    
+    
 
 class Transaction(models.Model):
     TYPE_CHOICES = (
@@ -56,54 +107,18 @@ class Transaction(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     box = models.ForeignKey(CashBox, related_name='transactions', on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
-    STATUS_CHOICES = (
-        ('Aberto', 'Aberto'),
-        ('Fechado', 'Fechado')
-    )
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES)
-    TABLE_CHOICES = (
-        ('Mesa 01', 'Mesa 01'),
-        ('Mesa 02', 'Mesa 02')
-    )
-    table = models.CharField(max_length=10, choices=TABLE_CHOICES)
+    
+
+    
+    
 
 
 
         
-class Revenue(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='user', on_delete=models.CASCADE)
-    menu_item = models.ForeignKey(Menu, on_delete=models.CASCADE) 
-    box = models.ForeignKey(CashBox, on_delete=models.CASCADE)
-    quantity = models.IntegerField(default=1)
-    date = models.DateTimeField(auto_now_add=True)
 
-    
-    def __str__(self):
-        return f"{self.quantity}x {self.menu_item.name}"
-     
      
  
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        
-        total_price = self.menu_item.price * self.quantity
-        box_instance = self.box
-
-        
-        
-        Transaction.objects.create(
-            type='Receita',
-            amount=total_price,
-            description=f"{self.quantity}x {self.menu_item.name}",
-            date=self.date,  
-            box=box_instance,
-            quantity=self.quantity, 
-            status='Aberto',
-            
-        )
-   
-            
         
         
 class Expense(models.Model):

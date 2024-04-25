@@ -84,6 +84,7 @@ export interface modelTransations {
   }
 
   export interface modelOrders{
+    id?: number;
     type: string;
     amount: number;
     menu_item: number;
@@ -93,6 +94,16 @@ export interface modelTransations {
     status: string;
     type_order: string;
     minutesPassed?: number;
+    secondsPassed?: number;
+    timerId: any;
+    formattedTime?: any;
+    open_timestamp: string;
+    closed_timestamp: string;
+    preparation_timestamp: string;
+    ready_timestamp: string;
+    menu_item_name: string;
+    items: any;
+    total: string;
 
 
   }

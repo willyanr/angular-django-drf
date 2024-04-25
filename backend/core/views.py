@@ -1,22 +1,20 @@
 from rest_framework import viewsets
-from financial.models import CashBox, Transaction, Revenue, Menu, Financeiro
+from financial.models import CashBox, Transaction, Orders, Menu, Financeiro, OrderItem
 from menu.models import Category
 from rest_framework.response import Response
-from .serializers import BoxSerializer, TransactionSerializer, SalesSerializer, MenuSerializer, FinanceiroSerializer, CategorySerializer, ProfileSerializer
+from .serializers import BoxSerializer, TransactionSerializer, OrdersSerializer, MenuSerializer, FinanceiroSerializer, CategorySerializer, ProfileSerializer, OrderItemSerializer
 from rest_framework import status
 from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
-from django.contrib.auth.models import User
 from django.middleware.csrf import get_token
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.decorators import authentication_classes, permission_classes
+from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
 from core.models import Profile
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
-
+from rest_framework import generics
 
 
 
@@ -60,23 +58,43 @@ class TransactionsViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        queryset = Transaction.objects.filter(box__user=user, box__date_close__isnull=True)
+        use_date_close_filter = self.request.query_params.get('use_date_close_filter', 'true')
+        if use_date_close_filter.lower() == 'true':
+            queryset = Transaction.objects.filter(box__user=user, box__date_close__isnull=True)
+        else:
+            queryset = Transaction.objects.filter(box__user=user)
         return queryset
+
+  
   
 
 
-class SalesViewSet(viewsets.ModelViewSet):
+class OrdersViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
-    serializer_class = SalesSerializer
+    serializer_class = OrdersSerializer
 
     def perform_create(self, serializer):
-    
         serializer.save(user=self.request.user)
+    
     def get_queryset(self):
         user = self.request.user
-        queryset = Revenue.objects.filter(box__user=user)
+        queryset = Orders.objects.filter(box__user=user)
         return queryset
 
+
+class OrdersListCreateViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+    serializer_class = OrderItemSerializer
+    
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+    
+    def get_queryset(self):
+        user = self.request.user
+        queryset = OrderItem.objects.filter(menu_item__user=user)
+        return queryset
+    
+    
 
 class MenuViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]

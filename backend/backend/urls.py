@@ -5,7 +5,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from rest_framework import routers
-from core.views import FinanceiroViewSet, ProfileViewSet, CashBoxViewSet, TransactionsViewSet, SalesViewSet, MenuViewSet, CategoryViewSet
+from core.views import FinanceiroViewSet, ProfileViewSet, CashBoxViewSet, TransactionsViewSet, OrdersViewSet, MenuViewSet, CategoryViewSet, OrdersListCreateViewSet
 from django.urls import path
 
 from rest_framework_simplejwt.views import (
@@ -21,9 +21,10 @@ router.register(r'api/financeiro', FinanceiroViewSet)
 router.register(r'api/profile', ProfileViewSet, basename='profile')
 router.register(r'api/cashbox', CashBoxViewSet, basename='cashbox')
 router.register(r'api/transactions', TransactionsViewSet, basename='transactions')
-router.register(r'api/sales', SalesViewSet, basename='sales')
+router.register(r'api/orders', OrdersViewSet, basename='sales')
 router.register(r'api/menu', MenuViewSet, basename='menu')
 router.register(r'api/category', CategoryViewSet, basename='category')
+router.register(r'api/menu-item', OrdersListCreateViewSet, basename='menu-item')
 
 
 

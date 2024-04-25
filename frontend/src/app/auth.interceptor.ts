@@ -25,7 +25,6 @@ export class AuthInterceptor implements HttpInterceptor {
           }
         });
         const url = request.url 
-        console.log('to aqui', url)
         return next.handle(authRequest)
         
       }

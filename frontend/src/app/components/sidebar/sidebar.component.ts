@@ -25,7 +25,7 @@ export class SidebarComponent {
   ngOnInit(): void {
     this.isActive('');
     this.accessProfile();
-    console.log(this.profile$)
+
     
   }
   logout(){
@@ -45,7 +45,7 @@ accessProfile(){
 
   this.profile$ = this.ProfileService.getProfile();
   this.profile$.subscribe(response => {
-    console.log('opaaaaaaaaaaaaaaa', response)
+
 
   })
 

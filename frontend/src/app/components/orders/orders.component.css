@@ -311,7 +311,7 @@ li{
 .custom-span-d{
   width: 180px;
   height: 24px;
-  background-color: red;
+  background-color: rgb(0, 255, 0);
   border-radius: 15px;
 
 
@@ -432,6 +432,22 @@ li{
 
 }
 
+.custom-p p{
+  font-size: 11px;
+  margin-bottom: 0;
+  
+
+
+}
+
+.custom-p li{
+  list-style: none;
+  margin: 0;
+  padding: 0;  
+
+
+}
+
 
 tbody td{
     font-size: 12px;
@@ -443,7 +459,7 @@ tbody td{
 
 .custom-span{
     background-color: red;
-    padding: 5px 7px;
+    padding: 7px 10px;
     border-radius: 5px;
     margin-left: 8px;
 
@@ -480,13 +496,12 @@ tbody td{
   }
   
 
-td{
-    
-    
-  border-bottom: 1px solid #ececec;
-    padding-bottom: 44px;
-  }
+  td {
 
+    border-bottom: 1px solid #ececec;
+    vertical-align: middle; 
+  }
+  
 .custom-title{
     background-color: transparent;
     font-weight: 800;
@@ -573,4 +588,105 @@ td{
 .form-check-input:checked {
   background-color: #fd0d0d;
   border-color: rgba(255, 94, 0, 0.781);
+}
+
+.icon-row{
+  font-size: 50px;
+
+
+} 
+
+
+
+
+
+
+.wrap {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.button {
+  width: 35px;
+  height: auto;
+  font-size: 20px;
+  color: #ff0000;
+  background: transparent;
+
+
+  border-radius: 1000px;
+
+  transition: all 0.3s ease-in-out 0s;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  padding: 10px;
+  }
+
+a::before {
+content: '';
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ff0000;
+  
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: all .3s ease-in-out 0s;
+}
+
+
+
+.button:hover, .button:focus {
+  background-color: red;
+  color: white;
+  transform: translateY(-6px);
+  width: 45px;
+  height: 45px;
+}
+
+a:hover::before, a:focus::before {
+  opacity: 1;
+  
+  
+
+}
+
+a::after {
+  content: '';
+  width: 25px; height: 10px;
+  border-radius: 100%;
+  border: 1px solid #ff0000;
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: ring 1.5s forwards;
+  
+}
+
+a:hover::after, a:focus::after {
+  animation: none;
+  display: none;
+  
+}
+
+@keyframes ring {
+  0% {
+    width: 30px;
+    height: 30px;
+    opacity: 1;
+  }
+  100% {
+    width: 80px;
+    height: 80px;
+    opacity: 0;
+  }
 }

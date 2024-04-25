@@ -149,6 +149,10 @@
                 <input class="form-check-input me-1" type="checkbox" value="" id="thirdCheckbox" [(ngModel)]="isCheckedCanceled">
                 <label class="form-check-label" for="thirdCheckbox">Pedidos Cancelados<span class="badge text-bg-secondary ms-3">{{orderCanceled.length}}</span></label>
               </li>
+              <li class="list-group-item">
+                <input class="form-check-input me-1" type="checkbox" value="" id="thirdCheckbox" [(ngModel)]="isCheckedCanceled">
+                <label class="form-check-label" for="thirdCheckbox">Pedidos em Preparo<span class="badge text-bg-secondary ms-3">{{orderPreparation.length}}</span></label>
+              </li>
             </ul>
              <div class="row">
               <div class="col d-flex flex-column">
@@ -202,75 +206,123 @@
                   <tr class="bg-custom" >
              
                     <th scope="col" width="5%"><input class="form-check-input" type="checkbox"></th>
+                    <th scope="col" width="5%">ID</th>
                     <th scope="col" width="10%">Tipo</th>
-                    <th scope="col" width="20%">Status</th>
-                    <th scope="col" width="15%" id="time-th">Tempo Pedido</th>
-                    <th scope="col" width="30%">Pedidos</th>
-                    <th scope="col" width="20%">Data</th>
+                    <th scope="col" width="10%">Status</th>
+                    <th scope="col" width="15%">Pedidos</th>
+                    <th scope="col" width="10%">Total</th>
+                    <th scope="col" width="10%">Histórico</th>
+                    <th scope="col" width="10%">Detalhes</th>
+                    
                   
                   </tr>
                 </thead>
                 <tbody>
-                  <tbody>
                     
                       @if (isCheckedAll) {
-                        @for (item of orderOpen; track $index) {
-                      <tr>
-                        <td scope="row"><input class="form-check-input" type="checkbox"></td>
-                        <td>{{ item.date | date }}</td>
-                        <td>
-                   
-                            <div>
-                              <i class="fa-solid fa-stopwatch" style="color: red;"></i>
-                              <span class="ms-1">{{ item.status }}</span>
-                            </div>
-                          
-                            
-                            
-                        </td>
-                        <td><i class="fa-solid fa-receipt"></i><span class="custom-span text-light"></span></td>
-                        <td style="font-size: 9pt;">{{ item.menu_item }}</td>
-                        <td>{{item.type_order}}</td>
-
-                      </tr>}}
-                      @else if (isCheckedClose) {
-                        @for (item of orderClose; track $index) {
+                        @for (order of ordersWithCounters; track $index) {
+                       
                           <tr>
                             <td scope="row"><input class="form-check-input" type="checkbox"></td>
-                            <td class="badge" id="badge-table">{{item.type_order}}</td>
+                            <td>{{order.id}}</td>
+                            <td>{{order.type_order}}</td>
                             
                             <td>
-                              @switch (item.status) {
-                                @case ('Aberto') {
+                              @switch (order.status) {
+                                @case ('OPEN') {
                                   <div>
                                     <i class="fa-solid fa-stopwatch" style="color: red;"></i>
-                                    <span class="ms-1">{{ item.status }}</span>
+                                    <span class="ms-1">Aberto</span>
                                   </div>
     
                                 }
-                                @case ('Fechado') {
+                                @case ('CLOSED') {
                                   <div>
                                     <i class="fa-solid fa-circle-check" style="color: #d6d6d6;"></i>
-                                    <span class="ms-1">{{ item.status }}</span>
+                                    <span class="ms-1">Fechado</span>
                                   </div>
                                 }
-                                @case ('Cancelado') {
+                                @case ('PREPARATION') {
                                   <div>
-                                    <i class="fa-solid fa-ban" style="color: #ff0000;"></i>
-                                    <span class="ms-1">{{ item.status }}</span>
+                                    <i class="fa-brands fa-free-code-camp" style="color: #ff0000;"></i>
+                                    <span class="ms-1">Preparando</span>
                                   </div>
                                 
                                 }
-                              }
-                          
+                                @case ('READY') {
+                                  <div>
+                                    <i class="fa-solid fa-circle-check" style="color: #ff0000;"></i>
+                                    <span class="ms-1">Pronto</span>
+                                  </div>
                                 
+                                }
+
+                                @case ('CANCELED') {
+                                  <div>
+                                    <i class="fa-solid fa-circle-check" style="color: #ff0000;"></i>
+                                    <span class="ms-1">Pronto</span>
+                                  </div>
                                 
+                                }
+                              }     
                             </td>
-                            <td><i class="fa-solid fa-receipt"></i><span class="custom-span text-light"></span></td>
-                            <td style="font-size: 9pt;">{{ item.menu_item }}</td>
-                            <td>{{ item.date | date }}</td>
-    
-                          </tr>}}
+                            <td>
+                              <span class="custom-span text-light">{{ (order.counter | async) }}</span>
+                            </td>
+                          </tr>}
+                        }
+                        @else if (isCheckedClose) {
+                          @for (order of ordersWithCounters; track $index) {
+                       
+                            <tr>
+                              <td scope="row"><input class="form-check-input" type="checkbox"></td>
+                              <td>{{order.id}}</td>
+                              <td class="badge" id="badge-table">{{order.type_order}}</td>
+                              
+                              <td>
+                                @switch (order.status) {
+                                  @case ('OPEN') {
+                                    <div>
+                                      <i class="fa-solid fa-stopwatch" style="color: red;"></i>
+                                      <span class="ms-1">Aberto</span>
+                                    </div>
+      
+                                  }
+                                  @case ('CLOSED') {
+                                    <div>
+                                      <i class="fa-solid fa-circle-check" style="color: #d6d6d6;"></i>
+                                      <span class="ms-1">Fechado</span>
+                                    </div>
+                                  }
+                                  @case ('PREPARATION') {
+                                    <div>
+                                      <i class="fa-brands fa-free-code-camp" style="color: #ff0000;"></i>
+                                      <span class="ms-1">Preparando</span>
+                                    </div>
+                                  
+                                  }
+                                  @case ('READY') {
+                                    <div>
+                                      <i class="fa-solid fa-circle-check" style="color: #ff0000;"></i>
+                                      <span class="ms-1">Pronto</span>
+                                    </div>
+                                  
+                                  }
+  
+                                  @case ('CANCELED') {
+                                    <div>
+                                      <i class="fa-solid fa-circle-check" style="color: #ff0000;"></i>
+                                      <span class="ms-1">Pronto</span>
+                                    </div>
+                                  
+                                  }
+                                }     
+                              </td>
+                              <td>
+                                <span class="custom-span text-light">{{ (order.counter | async) }}</span>
+                              </td>
+                            </tr>}
+                        }
                       @else if (isCheckedCanceled) {
                         @for (item of orderCanceled; track $index) {
                           <tr>
@@ -330,13 +382,16 @@
 
                       </tr>}}
                       @else {
-                        @for (item of data$|async; track $index) {
+                    
+                         @for (order of data$ |async; track $index) {
+                       
                           <tr>
                             <td scope="row"><input class="form-check-input" type="checkbox"></td>
-                            <td class="badge" id="badge-table">{{item.type_order}}</td>
-                            
+                            <td>{{$index +1}}</td>
                             <td>
-                              @switch (item.status) {
+                              <span class="badge">{{order.type_order}}</span></td>
+                            <td>
+                              @switch (order.status) {
                                 @case ('OPEN') {
                                   <div>
                                     <i class="fa-solid fa-stopwatch" style="color: red;"></i>
@@ -344,15 +399,10 @@
                                   </div>
     
                                 }
-                                @case ('CLOSED') {
-                                  <div>
-                                    <i class="fa-solid fa-circle-check" style="color: #d6d6d6;"></i>
-                                    <span class="ms-1">Fechado</span>
-                                  </div>
-                                }
+                               
                                 @case ('PREPARATION') {
                                   <div>
-                                    <i class="fa-brands fa-free-code-camp" style="color: #ff0000;"></i>
+                                    <i class="fa-solid fa-fire-flame-curved" style="color: #ff0000;"></i>
                                     <span class="ms-1">Preparando</span>
                                   </div>
                                 
@@ -372,34 +422,104 @@
                                   </div>
                                 
                                 }
-                              }
-                            
-                                
-                                
+                                @case ('CLOSED') {
+                                  <div>
+                                    <i class="fa-solid fa-circle-check" style="color: #d6d6d6;"></i>
+                                    <span class="ms-1">Fechado</span>
+                                  </div>
+                                  
+                                }
+                              }     
                             </td>
-                            <td>{{ item.date | date: 'HH:mm:ss' }}</td>
+                            <td>
+                             
+                              <div class="custom-p">
+                                @for (item of order.items; track $index) {
+                                
+                                      <p>{{ item.menu_item_name }} - {{ item.quantity }}x</p>
+                               
+                              }
+                              </div>
+                              
+                            </td>
+                            <td>{{order.total}}</td>
+                            
+                           
 
                             <td>
-                              <i class="fa-solid fa-receipt"></i>
-                              <span class="custom-span text-light">{{ minutesPassed }}:{{ secondsPassed }}</span>
+                              <div class="custom-p">
+                                @if (order.status === 'OPEN') {
+                                    <p>Aberto: {{ order.open_timestamp | date:'HH:mm' }}</p>
+                                  }
+                                  @else if (order.status === 'PREPARATION') {
+                                    <p>Aberto: {{ order.open_timestamp | date:'HH:mm' }}</p>
+                                    <p>Em Preparo: {{ order.preparation_timestamp | date:'HH:mm' }}</p>
+                                  }
+                                  @else if (order.status === 'READY') {
+                                    <p>Aberto: {{ order.open_timestamp | date:'HH:mm' }}</p>
+                                    <p>Em Preparo: {{ order.preparation_timestamp | date:'HH:mm' }}</p>
+                                    <p>Pronto: {{ order.ready_timestamp | date:'HH:mm' }}</p>
+                                  }
+                                  @else if (order.status === 'CLOSED') {
+                                    <p>Aberto: {{ order.open_timestamp | date:'HH:mm' }}</p>
+                                    <p>Em Preparo: {{ order.preparation_timestamp | date:'HH:mm' }}</p>
+                                    <p>Pronto: {{ order.ready_timestamp | date:'HH:mm' }}</p>
+                                    <p>Fechado: {{ order.closed_timestamp | date:'HH:mm' }}</p>
+                                  }
+                                  @else if (order.status === 'CANCELED') {
+                                    <p>Aberto: {{ order.open_timestamp | date:'HH:mm' }}</p>
+                                    <p>Cancelado: {{ order.preparation_timestamp | date:'HH:mm' }}</p>
+                                  }
+                          
+                              </div>
+
                             </td>
-                            
-                            <td style="font-size: 9pt;">{{ item.menu_item }}</td>
-                            <td>{{ item.date | date }}</td>
+                            <td>
+                  
+
+                                <div class="wrap">
+                                  <a href="" class="button"><i class="fa-regular fa-file-lines"></i></a>
+                                </div>
+                              
+                                  
+              
+                            </td>
+
+                
     
-                          </tr>}
+                          </tr>
+                        
+                        
+                        
+                        }
+                          
+                          
 
                       }
            
-           
+             
                        
           
                   </tbody>
-  
+        
           </table>
           </div>
           </div>
         </div>
        </div>
      </div>
+     <table>
+      <tbody>
+        <tr >
+          <td>
+            <i class="fa-solid fa-receipt"></i>
+          </td>
+          <td>
+            
+          </td>
+        </tr>
+      </tbody>
+    </table>
     
+
+

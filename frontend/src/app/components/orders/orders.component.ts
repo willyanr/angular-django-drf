@@ -1,4 +1,4 @@
-import { threadId } from 'worker_threads';
+
 import { modelFinancial, modelMenu, modelOrders, modelTransations } from './../../models/financial.model';
 import { OrdertableComponent } from './../ordertable/ordertable.component';
 import { CommonModule } from '@angular/common';
@@ -7,12 +7,17 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
 import { FinancialService } from '../../service/financial.service';
 import { Observable } from 'rxjs';
 import { FormsModule } from '@angular/forms';
-import { response } from 'express';
+import { time } from 'console';
+import { NgZone } from '@angular/core';
+import { timer } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 enum TransactionStatus {
-  Aberto = 'Aberto',
-  Fechado = 'Fechado',
-  Cancelado = 'Cancelado'
+  Aberto = 'OPEN',
+  Fechado = 'CLOSED',
+  Cancelado = 'CANCELED',
+  Pronto = 'READY',
+  em_preparo = 'PREPARATION'
 }
 
 enum TransactionTypeOrder {
@@ -27,6 +32,7 @@ enum TransactionTypeOrder {
     OrdertableComponent,
     SidebarComponent,
     FormsModule,
+    
 
 
 
@@ -37,7 +43,7 @@ enum TransactionTypeOrder {
 export class OrdersComponent {
   menu$ = new Observable <modelMenu[]>;
   data$ = new Observable <modelOrders[]>;
-  sales$ = new Observable <modelFinancial[]>;
+
   productActive: modelMenu[] = [];
   productDeactivate: modelMenu[] = [];
   totalMenu: number = 0;
@@ -50,19 +56,23 @@ export class OrdersComponent {
   orderOpen: modelOrders[] = [];
   orderClose: modelOrders[] = [];
   orderCanceled: modelOrders[] = [];
+  orderPreparation: modelOrders[] = [];
   orderTable: modelOrders[] = [];
   orderDelivery: modelOrders[] = [];
   minutesPassed: number = 0;
   secondsPassed: number = 0;
+  ordersWithCounters: any[] = [];
 
 
 
-  constructor(private FinancialService: FinancialService){}
+  constructor(private FinancialService: FinancialService, private ngZone: NgZone){}
 
   ngOnInit(): void {
     this.getMenu();
     this.getOrders();
-    this.getSales();
+
+ 
+    
 
 
   }
@@ -84,56 +94,43 @@ export class OrdersComponent {
       });
     });
   }
-
-
   getOrders() {
     this.data$ = this.FinancialService.getOrdersService(false);
-    this.data$.subscribe(transactions => {
-      
-      this.orderOpen = transactions.filter(transaction => transaction.status === TransactionStatus.Aberto);
-      this.orderClose = transactions.filter(transaction => transaction.status === TransactionStatus.Fechado);
-      this.orderTable = transactions.filter(transaction => transaction.type_order === TransactionTypeOrder.Mesa);
-      this.orderDelivery = transactions.filter(transaction => transaction.type_order === TransactionTypeOrder.Delivery);
-      this.orderCanceled = transactions.filter(transaction => transaction.status === TransactionStatus.Cancelado);
-      transactions.forEach(response => {
-        this.startCounter(new Date(response.date));
+    this.data$.subscribe((orders: modelOrders[]) => {
 
+      this.ordersWithCounters = orders.map((order: modelOrders) => {
+        return {
+          ...order,
+          counter: this.initializeCounter(order)
+        };
+      });
+  
+      this.orderOpen = this.ordersWithCounters.filter((order: modelOrders) => order.status === TransactionStatus.Aberto);
+      this.orderClose = this.ordersWithCounters.filter((order: modelOrders) => order.status === TransactionStatus.Fechado);
+      this.orderTable = this.ordersWithCounters.filter((order: modelOrders) => order.type_order === TransactionTypeOrder.Mesa);
+      this.orderDelivery = this.ordersWithCounters.filter((order: modelOrders) => order.type_order === TransactionTypeOrder.Delivery);
+      this.orderCanceled = this.ordersWithCounters.filter((order: modelOrders) => order.status === TransactionStatus.Cancelado);
+      this.orderPreparation = this.ordersWithCounters.filter((order: modelOrders) => order.status === TransactionStatus.em_preparo);
 
-      })
-    
-      
     });
+    
   }
+  initializeCounter(order: modelOrders): Observable<string> {
+    const time = new Date(order.open_timestamp);
+    const currentTime = new Date();
   
-  startCounter(startTime: Date): void {
-    setInterval(() => {
-      const currentTime = new Date();
-      const differenceMs = currentTime.getTime() - startTime.getTime();
-      const totalSeconds = Math.floor(differenceMs / 1000);
-      this.minutesPassed = Math.floor(totalSeconds / 60);
-      this.secondsPassed = totalSeconds % 60;
-    }, 1000);
-  }
-  
-  getSales(){
-    this.sales$ = this.FinancialService.getSales();
-    this.sales$.subscribe(response => {
-      response.forEach(item => {
-        this.totalSales += 1;
-        
-
-
+    const timer$ = timer(0, 1000).pipe(
+      map(() => {
+        const differenceMs = new Date().getTime() - time.getTime();
+        const totalSeconds = Math.floor(differenceMs / 1000);
+        const minutesPassed = Math.floor(totalSeconds / 60);
+        const secondsPassed = totalSeconds % 60;
+        return `${minutesPassed.toString().padStart(2, '0')}:${secondsPassed.toString().padStart(2, '0')}`;
       })
-
-
-
-    })
-
-
-
+    );
+  
+    return timer$;
   }
-
-
 
 
 
