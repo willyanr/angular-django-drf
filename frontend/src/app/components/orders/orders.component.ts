@@ -11,6 +11,7 @@ import { time } from 'console';
 import { NgZone } from '@angular/core';
 import { timer } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ModelOrderComponent } from '../models/model-order/model-order.component';
 
 enum TransactionStatus {
   Aberto = 'OPEN',
@@ -32,6 +33,7 @@ enum TransactionTypeOrder {
     OrdertableComponent,
     SidebarComponent,
     FormsModule,
+    ModelOrderComponent,
     
 
 

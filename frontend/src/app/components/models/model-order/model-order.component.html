@@ -1,0 +1,81 @@
+<div class="modal fade" id="model-order" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <div class="container">
+                  <div class="row">
+                      <div class="col-md-12">
+                          <form id="formWizard" method="POST">
+                              <div class="wizard">
+                                  <div class="wizard-inner">
+                                      <div class="connecting-line"></div>
+                                      <ul class="nav nav-tabs" role="tablist">
+                                          <!-- STEP 1 -->
+                                          <li role="presentation" class="nav-item">
+                                              <a href="#step1" data-bs-toggle="tab" aria-controls="step1" role="tab" title="Passo 1" class="nav-link active">
+                                                  <span class="round-tab">1</span>
+                                              </a>
+                                          </li>
+                                          <!-- STEP 2 -->
+                                          <li role="presentation" class="nav-item">
+                                              <a href="#step2" data-bs-toggle="tab" aria-controls="step2" role="tab" title="Passo 2" class="nav-link">
+                                                  <span class="round-tab">2</span>
+                                              </a>
+                                          </li>
+                                          <!-- STEP 3 -->
+                                          <li role="presentation" class="nav-item">
+                                              <a href="#step3" data-bs-toggle="tab" aria-controls="step3" role="tab" title="Passo 3" class="nav-link">
+                                                  <span class="round-tab">3</span>
+                                              </a>
+                                          </li>
+                                          <!-- STEP 4 -->
+                                          <li role="presentation" class="nav-item">
+                                              <a href="#step4" data-bs-toggle="tab" aria-controls="step4" role="tab" title="Passo 4" class="nav-link">
+                                                  <span class="round-tab">4</span>
+                                              </a>
+                                          </li>
+                                      </ul>
+                                  </div>
+                                  <div class="tab-content">
+                                      <!-- STEP 1 -->
+                                      <div class="tab-pane active" role="tabpanel" id="step1">
+                                          <h3>Passo 1</h3>
+                                          <p>Este é o Passo 1</p>
+                                          <button type="button" class="btn btn-primary next-step">Próximo</button>
+                                      </div>
+                                      <!-- STEP 2 -->
+                                      <div class="tab-pane" role="tabpanel" id="step2">
+                                          <h3>Passo 2</h3>
+                                          <p>Este é o Passo 2</p>
+                                          <button type="button" class="btn btn-primary next-step">Próximo</button>
+                                      </div>
+                                      <!-- STEP 3 -->
+                                      <div class="tab-pane" role="tabpanel" id="step3">
+                                          <h3>Passo 3</h3>
+                                          <p>Este é o Passo 3</p>
+                                          <button type="button" class="btn btn-primary next-step">Próximo</button>
+                                      </div>
+                                      <!-- STEP 4 -->
+                                      <div class="tab-pane" role="tabpanel" id="step4">
+                                          <h3>Passo 4</h3>
+                                          <p>Este é o Passo 4</p>
+                                          <button type="submit" class="btn btn-success">Enviar</button>
+                                      </div>
+                                  </div>
+                              </div>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+      </div>
+  </div>
+</div>

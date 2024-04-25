@@ -607,6 +607,11 @@ tbody td{
   align-items: center;
   justify-content: center;
 
+
+}
+.button i {
+  color: yellow !important;
+
 }
 
 .button {
@@ -614,11 +619,7 @@ tbody td{
   height: auto;
   font-size: 20px;
   color: #ff0000;
-  background: transparent;
-
-
   border-radius: 1000px;
-
   transition: all 0.3s ease-in-out 0s;
   cursor: pointer;
   outline: none;
@@ -645,7 +646,7 @@ content: '';
 
 .button:hover, .button:focus {
   background-color: red;
-  color: white;
+
   transform: translateY(-6px);
   width: 45px;
   height: 45px;
@@ -653,6 +654,7 @@ content: '';
 
 a:hover::before, a:focus::before {
   opacity: 1;
+  
   
   
 
@@ -670,11 +672,15 @@ a::after {
   transform: translate(-50%, -50%);
   animation: ring 1.5s forwards;
   
+
+  
 }
 
 a:hover::after, a:focus::after {
   animation: none;
   display: none;
+
+
   
 }
 

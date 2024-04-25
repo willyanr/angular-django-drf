@@ -5,7 +5,12 @@
   "projects": {
     "frontend": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@ngrx/schematics:component": {
+            "display-block": true
+
+        }
+    },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -97,7 +102,8 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": ["node_modules/bootstrap/dist/js/bootstrap.js",
-          "node_modules/bootstrap/dist/js/bootstrap.js"]
+          "node_modules/bootstrap/dist/js/bootstrap.js",
+          "src/assets/js/modelOrders.js"]
           }
         }
       }

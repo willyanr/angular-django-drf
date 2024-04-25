@@ -1,3 +1,4 @@
+import { ModelOrderComponent } from './components/models/model-order/model-order.component';
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -36,6 +37,7 @@ import { Router, NavigationEnd } from '@angular/router';
     MenuComponent,
     OrdersComponent,
     HomepageComponent,
+    ModelOrderComponent,
   
   
   
