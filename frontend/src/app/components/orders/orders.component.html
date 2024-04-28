@@ -1,532 +1,578 @@
-
-     <div class="container-fluid border border-primary">
-       <div class="row">
-         <div class="col">
-           <main class="mt-4">
-             <div class="row">
-               <div class="col">
-                 <div class="row">
-                   <div class="col-xl-3 col-lg-6 col-md-12 col-12">
-                     <div class="card mb-4">
-                       <div>
-                         <div class="card-body">
-                          <div class="col-9 col-xxl-9">
-                            <span class="badge text-bg-secondary mb-4">Total Pedidos</span>
-                           </div>
-                           <div class="mt-2 d-flex justify-content-between align-items-center">
-                             <div class="lh-1">
-                               <div class="">
-                                 <h2 class="h1 fw-bold ms-2">Total: {{totalSales}}</h2>
-                               </div>
-                               <div class="row">
-                                  <div class="col-1">
-                                    <span><i class="fa-regular fa-circle-question" style="color: #ff0000;"></i></span>
-                                  </div>
-                                  <div class="col-10">
-                                    <p>Inclusos todos os pedidos (abertos, fechados e cancelados)</p>
-                                  </div>
-                               </div>
-                             </div>
-                             <div>
-                               <span class="bg-light-primary icon-shape icon-xl rounded-3 text-dark-primary icon"><i class="fa-solid fa-sort-up c-icon"></i></span>
-                             </div>
-                           </div>
-                         </div>
-                       </div>
-                     </div>
-                   </div>
-                   <div class="col-xl-3 col-lg-6 col-md-12 col-12">
-                     <!-- Card Orders -->
-                     <div class="card mb-4">
-                         <div class="card-body">
-                           <div class="row">
-                            <div class="col-9 col-xxl-9">
-                              <span class="badge text-bg-secondary">Tipo Pedido</span>
-                             </div>
-                             <div class="mt-2 d-flex justify-content-between">
-                              <div class="lh-1">
-                                <div class="mt-2 d-flex">
-                                  <div class="mb-4 p-0 custom-text">
-                                    <p class="">Delivery: <span class="ms-2 badge badge-secondary">{{orderDelivery.length}}</span></p>
-                                    <p class="">Mesa:  <span class="ms-2 badge badge-secondary">{{orderTable.length}}</span></p>
-                                  </div>
-                                </div>
-                              </div>
-                              <div>
-                                <span class="bg-light-primary icon-shape icon-xl rounded-3 text-dark-primary icon"><i class="fa-solid fa-receipt c-icon" style="color: #ff0000;"></i></span>
-                              </div>
-                            </div>
-                              
-                           </div>
-                         </div>
-                       </div>
-                    </div>
-                   <div class="col-xl-3 col-lg-6 col-md-12 col-12">
-                     <!-- Card -->
-                     <div class="card mb-4">
-                       <!-- Card Body -->
-                       <div class="card-body">
-                         <div class="row">
-                           <div class="col-9 col-xxl-9">
-                            <span class="badge text-bg-secondary">Meu Cardápio</span>
-                           </div>
-                           <div class="col-3 col-xxl-3 text-end">
-                             <a tabindex="0" class="custom" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="O que é ticket médio?" data-bs-content="Ticket médio é todas suas vendas dividas pelo número totais de pedidos"><i class="fa-regular fa-circle-question"></i></a>
-                           </div>
-                         </div>
-                        
-                         <div class="mt-2 d-flex justify-content-between align-items-center">
-                          <div class="lh-1">
-                            <div class="mt-2 d-flex">
-                      
-                              <div class="mb-4 p-0 custom-text">
-                                <p class="">Ativos: <span class="ms-2 badge badge-secondary">{{productActive.length}}</span></p>
-                                <p class="">Desativados:  <span class="ms-2 badge badge-secondary">{{productDeactivate.length}}</span></p>
-                            
-                              </div>
-                            </div>
-                          </div>
-                      
-                          <div>
-                              <span class="bg-light-success icon-shape icon-xl rounded-3 text-dark-success"><i class="fa-solid fa-hand-holding-dollar c-icon"></i></span>
-                          </div>
+<div class="container-fluid border border-primary">
+  <div class="row">
+    <div class="col">
+      <main class="mt-4">
+        <div class="row">
+          <div class="col">
+            <div class="row">
+              <div class="col-xl-3 col-lg-6 col-md-12 col-12">
+                <div class="card mb-4">
+                  <div>
+                    <div class="card-body">
+                      <div class="col-9 col-xxl-9">
+                        <span class="badge text-bg-secondary mb-4">Total Pedidos</span>
                       </div>
-                      
-                       </div>
-                     </div>
-                   </div>
-                   <div class="col-xl-3 col-lg-6 col-md-12 col-12">
-                     <!-- Card -->
-                     <div class="card mb-4">
-                       <!-- Card Body -->
-                       <div class="card-body">
-                         <div class="row">
-                          <div class="col-9 col-xxl-9">
-                            <span class="badge text-bg-secondary">Delivery</span>
-                           </div>
-                           <div class="col-3 col-xxl-3 text-end">
-                             <a tabindex="0" class="custom" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Dismissible popover" data-bs-content="And here's some amazing content. It's very engaging. Right?"><i class="fa-regular fa-circle-question"></i></a>
-                           </div>
-                         </div>
-                         <div class="mt-2 d-flex justify-content-between align-items-center">
-                           <div class="lh-1">
-                             <h2 class="h1 fw-bold mb-4">Status:</h2>
-                             <span class="badge badge-pill badge-success">Online</span>
-                           </div>
-                           
-                           <div>
-                             <span class="bg-light-info icon-shape icon-xl rounded-3 text-dark-info"><i class="fa-solid fa-motorcycle c-icon" style="color: #ff0000;"></i></span>
-                           </div>
-                         </div>
-                       </div>
-                     </div>
-                   </div>
-                 </div>
-               </div>
-             </div>
-           </main>
-         </div>
-       </div>
-       <div class="row">
-         <div class="col-12 col-md-12 col-xxl-3 mb-4">
-           <div class="custom-bg h-100 mb-3">
-             <ul class="list-group">
-              <li class="list-group-item d-flex">
-                <div class="justify-content-start mt-4">
-                  <p>Filtre sua Busca</p>
-                  <input class="form-check-input me-1" type="checkbox" value="" id="firstCheckbox" checked [(ngModel)]="isCheckedAll">
-                  <label class="form-check-label" for="firstCheckbox">Pedidos Abertos<span class="badge text-bg-secondary ms-3">{{orderOpen.length}}</span></label>
-                </div>
-                <div class="justify-content-end">
-                  <i class="fa-solid fa-clock-rotate-left" style="color: #ff0000;"></i>
-                </div>
-              </li>
-              <li class="list-group-item">
-                <input class="form-check-input me-1" type="checkbox" value="" id="secondCheckbox" [(ngModel)]="isCheckedClose">
-                <label class="form-check-label" for="secondCheckbox">Pedidos Fechados<span class="badge text-bg-secondary ms-3">{{orderClose.length}}</span></label>
-              </li>
-              <li class="list-group-item">
-                <input class="form-check-input me-1" type="checkbox" value="" id="thirdCheckbox" [(ngModel)]="isCheckedCanceled">
-                <label class="form-check-label" for="thirdCheckbox">Pedidos Cancelados<span class="badge text-bg-secondary ms-3">{{orderCanceled.length}}</span></label>
-              </li>
-              <li class="list-group-item">
-                <input class="form-check-input me-1" type="checkbox" value="" id="thirdCheckbox" [(ngModel)]="isCheckedCanceled">
-                <label class="form-check-label" for="thirdCheckbox">Pedidos em Preparo<span class="badge text-bg-secondary ms-3">{{orderPreparation.length}}</span></label>
-              </li>
-            </ul>
-             <div class="row">
-              <div class="col d-flex flex-column">
-                <div class="ms-3 mt-2">
-                  <p>Tipo de pedido:</p>
-                  <div class="custom-mobile">
-                    <div class="btn-group mt-0" role="group" aria-label="Basic radio toggle button group">
-                      <input type="checkbox" class="btn-check" name="btnradio" id="btnradio1" value="" checked [(ngModel)]="isCheckedAll" [(ngModel)]="isCheckedClose" [(ngModel)]="isCheckedCanceled">
-                      <label class="btn btn-outline-primary" for="btnradio1">Todos</label>
-                      <input type="checkbox" class="btn-check" name="btnradio" id="btnradio1" value=""  [(ngModel)]="isCheckedTable">
-                      <label class="btn btn-outline-primary" for="btnradio2">Mesa</label>
-                      <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" value=""  [(ngModel)]="isCheckedDelivery">
-                      <label class="btn btn-outline-primary" for="btnradio3">Delivery</label>
-                    </div>
-                    
-                  </div>
-                  
-                
-              </div>
-              </div>
-            </div>
-           </div>
-         </div>
-         <div class="col">
-            <div class="row">
-              <div class="col-7 col-md-4 col-xxl-3 custom-title ms-3">
-                <h2>Meus Pedidos 🔥</h2>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                
-              </div>
-            </div>
-            <div class="custom-table">
-              <div class="mb-2 d-flex justify-content-between align-items-center pt-2 ms-2 custom-filter">
-                <div class="position-relative custom-placeholder a">
-                  <span class="position-absolute search"><i class="fa fa-search"></i></span>
-                  <input class="form-control w-100  bg-custom" placeholder="Busque o pedido">
-                </div>
-                <div class="px-2 custom-btn-link justify-content-end">
-                  <span><a href="." class="custom-link" id="btn-close-order">Fechar Pedido <i class="fa-solid fa-arrow-right"></i></a> </span>
-                </div>
-                  
-              </div>
-              <div class="table-responsive">
-           
-              <table class="table table-responsive table-borderless ms-3 fixed-header">
-                  
-                <thead class="fixed-header">
-                  <tr class="bg-custom" >
-             
-                    <th scope="col" width="5%"><input class="form-check-input" type="checkbox"></th>
-                    <th scope="col" width="5%">ID</th>
-                    <th scope="col" width="10%">Tipo</th>
-                    <th scope="col" width="10%">Status</th>
-                    <th scope="col" width="15%">Pedidos</th>
-                    <th scope="col" width="10%">Total</th>
-                    <th scope="col" width="10%">Histórico</th>
-                    <th scope="col" width="10%">Detalhes</th>
-                    
-                  
-                  </tr>
-                </thead>
-                <tbody>
-                    
-                      @if (isCheckedAll) {
-                        @for (order of ordersWithCounters; track $index) {
-                       
-                          <tr>
-                            <td scope="row"><input class="form-check-input" type="checkbox"></td>
-                            <td>{{order.id}}</td>
-                            <td>{{order.type_order}}</td>
-                            
-                            <td>
-                              @switch (order.status) {
-                                @case ('OPEN') {
-                                  <div>
-                                    <i class="fa-solid fa-stopwatch" style="color: red;"></i>
-                                    <span class="ms-1">Aberto</span>
-                                  </div>
-    
-                                }
-                                @case ('CLOSED') {
-                                  <div>
-                                    <i class="fa-solid fa-circle-check" style="color: #d6d6d6;"></i>
-                                    <span class="ms-1">Fechado</span>
-                                  </div>
-                                }
-                                @case ('PREPARATION') {
-                                  <div>
-                                    <i class="fa-brands fa-free-code-camp" style="color: #ff0000;"></i>
-                                    <span class="ms-1">Preparando</span>
-                                  </div>
-                                
-                                }
-                                @case ('READY') {
-                                  <div>
-                                    <i class="fa-solid fa-circle-check" style="color: #ff0000;"></i>
-                                    <span class="ms-1">Pronto</span>
-                                  </div>
-                                
-                                }
-
-                                @case ('CANCELED') {
-                                  <div>
-                                    <i class="fa-solid fa-circle-check" style="color: #ff0000;"></i>
-                                    <span class="ms-1">Pronto</span>
-                                  </div>
-                                
-                                }
-                              }     
-                            </td>
-                            <td>
-                              <span class="custom-span text-light">{{ (order.counter | async) }}</span>
-                            </td>
-                          </tr>}
-                        }
-                        @else if (isCheckedClose) {
-                          @for (order of ordersWithCounters; track $index) {
-                       
-                            <tr>
-                              <td scope="row"><input class="form-check-input" type="checkbox"></td>
-                              <td>{{order.id}}</td>
-                              <td class="badge" id="badge-table">{{order.type_order}}</td>
-                              
-                              <td>
-                                @switch (order.status) {
-                                  @case ('OPEN') {
-                                    <div>
-                                      <i class="fa-solid fa-stopwatch" style="color: red;"></i>
-                                      <span class="ms-1">Aberto</span>
-                                    </div>
-      
-                                  }
-                                  @case ('CLOSED') {
-                                    <div>
-                                      <i class="fa-solid fa-circle-check" style="color: #d6d6d6;"></i>
-                                      <span class="ms-1">Fechado</span>
-                                    </div>
-                                  }
-                                  @case ('PREPARATION') {
-                                    <div>
-                                      <i class="fa-brands fa-free-code-camp" style="color: #ff0000;"></i>
-                                      <span class="ms-1">Preparando</span>
-                                    </div>
-                                  
-                                  }
-                                  @case ('READY') {
-                                    <div>
-                                      <i class="fa-solid fa-circle-check" style="color: #ff0000;"></i>
-                                      <span class="ms-1">Pronto</span>
-                                    </div>
-                                  
-                                  }
-  
-                                  @case ('CANCELED') {
-                                    <div>
-                                      <i class="fa-solid fa-circle-check" style="color: #ff0000;"></i>
-                                      <span class="ms-1">Pronto</span>
-                                    </div>
-                                  
-                                  }
-                                }     
-                              </td>
-                              <td>
-                                <span class="custom-span text-light">{{ (order.counter | async) }}</span>
-                              </td>
-                            </tr>}
-                        }
-                      @else if (isCheckedCanceled) {
-                        @for (item of orderCanceled; track $index) {
-                          <tr>
-                            <td scope="row"><input class="form-check-input" type="checkbox"></td>
-                            <td class="badge" id="badge-table">{{item.type_order}}</td>
-                            
-                            <td>
-                              @switch (item.status) {
-                                @case ('Aberto') {
-                                  <div>
-                                    <i class="fa-solid fa-stopwatch" style="color: red;"></i>
-                                    <span class="ms-1">{{ item.status }}</span>
-                                  </div>
-    
-                                }
-                                @case ('Fechado') {
-                                  <div>
-                                    <i class="fa-solid fa-circle-check" style="color: #d6d6d6;"></i>
-                                    <span class="ms-1">{{ item.status }}</span>
-                                  </div>
-                                }
-                                @case ('Cancelado') {
-                                  <div>
-                                    <i class="fa-solid fa-ban" style="color: #ff0000;"></i>
-                                    <span class="ms-1">{{ item.status }}</span>
-                                  </div>
-                                
-                                }
-                              }
-                          
-                                
-                                
-                            </td>
-                            <td><i class="fa-solid fa-receipt"></i><span class="custom-span text-light"></span></td>
-                            <td style="font-size: 9pt;">{{ item.menu_item }}</td>
-                            <td>{{ item.date | date }}</td>
-    
-                          </tr>}}
-                      @else if (isCheckedDelivery) {
-                        @for (item of orderDelivery; track $index) {
-                      <tr>
-                        <td scope="row"><input class="form-check-input" type="checkbox"></td>
-                        <td>{{ item.date | date }}</td>
-                        <td>
-                   
-                            <div>
-                              <i class="fa-solid fa-ban" style="color: #ff0000;"></i>
-                              <span class="ms-1">{{ item.status }}</span>
+                      <div class="mt-2 d-flex justify-content-between align-items-center">
+                        <div class="lh-1">
+                          <div class="">
+                            <h2 class="h1 fw-bold ms-2">Total: {{totalSales}}</h2>
+                          </div>
+                          <div class="row">
+                            <div class="col-1">
+                              <span><i class="fa-regular fa-circle-question" style="color: #ff0000;"></i></span>
                             </div>
-                          
-                            
-                            
-                        </td>
-                        <td><i class="fa-solid fa-receipt"></i><span class="custom-span text-light"></span></td>
-                        <td style="font-size: 9pt;">{{ item.menu_item }}</td>
-                        <td>aa</td>
-
-                      </tr>}}
-                      @else {
-                    
-                         @for (order of data$ |async; track $index) {
-                       
-                          <tr>
-                            <td scope="row"><input class="form-check-input" type="checkbox"></td>
-                            <td>{{$index +1}}</td>
-                            <td>
-                              <span class="badge">{{order.type_order}}</span></td>
-                            <td>
-                              @switch (order.status) {
-                                @case ('OPEN') {
-                                  <div>
-                                    <i class="fa-solid fa-stopwatch" style="color: red;"></i>
-                                    <span class="ms-1">Aberto</span>
-                                  </div>
-    
-                                }
-                               
-                                @case ('PREPARATION') {
-                                  <div>
-                                    <i class="fa-solid fa-fire-flame-curved" style="color: #ff0000;"></i>
-                                    <span class="ms-1">Preparando</span>
-                                  </div>
-                                
-                                }
-                                @case ('READY') {
-                                  <div>
-                                    <i class="fa-solid fa-circle-check" style="color: #ff0000;"></i>
-                                    <span class="ms-1">Pronto</span>
-                                  </div>
-                                
-                                }
-
-                                @case ('CANCELED') {
-                                  <div>
-                                    <i class="fa-solid fa-circle-check" style="color: #ff0000;"></i>
-                                    <span class="ms-1">Pronto</span>
-                                  </div>
-                                
-                                }
-                                @case ('CLOSED') {
-                                  <div>
-                                    <i class="fa-solid fa-circle-check" style="color: #d6d6d6;"></i>
-                                    <span class="ms-1">Fechado</span>
-                                  </div>
-                                  
-                                }
-                              }     
-                            </td>
-                            <td>
-                             
-                              <div class="custom-p">
-                                @for (item of order.items; track $index) {
-                                
-                                      <p>{{ item.menu_item_name }} - {{ item.quantity }}x</p>
-                               
-                              }
-                              </div>
-                              
-                            </td>
-                            <td>{{order.total}}</td>
-                            
-                           
-
-                            <td>
-                              <div class="custom-p">
-                                @if (order.status === 'OPEN') {
-                                    <p>Aberto: {{ order.open_timestamp | date:'HH:mm' }}</p>
-                                  }
-                                  @else if (order.status === 'PREPARATION') {
-                                    <p>Aberto: {{ order.open_timestamp | date:'HH:mm' }}</p>
-                                    <p>Em Preparo: {{ order.preparation_timestamp | date:'HH:mm' }}</p>
-                                  }
-                                  @else if (order.status === 'READY') {
-                                    <p>Aberto: {{ order.open_timestamp | date:'HH:mm' }}</p>
-                                    <p>Em Preparo: {{ order.preparation_timestamp | date:'HH:mm' }}</p>
-                                    <p>Pronto: {{ order.ready_timestamp | date:'HH:mm' }}</p>
-                                  }
-                                  @else if (order.status === 'CLOSED') {
-                                    <p>Aberto: {{ order.open_timestamp | date:'HH:mm' }}</p>
-                                    <p>Em Preparo: {{ order.preparation_timestamp | date:'HH:mm' }}</p>
-                                    <p>Pronto: {{ order.ready_timestamp | date:'HH:mm' }}</p>
-                                    <p>Fechado: {{ order.closed_timestamp | date:'HH:mm' }}</p>
-                                  }
-                                  @else if (order.status === 'CANCELED') {
-                                    <p>Aberto: {{ order.open_timestamp | date:'HH:mm' }}</p>
-                                    <p>Cancelado: {{ order.preparation_timestamp | date:'HH:mm' }}</p>
-                                  }
-                          
-                              </div>
-
-                            </td>
-                            <td>
-                  
-
-                                <div class="wrap">
-                                  <a href="" class="button"><i class="fa-solid fa-file"></i></a>
-                                </div>
-                              
-                                  
-              
-                            </td>
-
-                
-    
-                          </tr>
-                        
-                        
-                        
-                        }
-                          
-                          
-
-                      }
-           
-             
-                       
-          
-                  </tbody>
-        
-          </table>
-          </div>
+                            <div class="col-10">
+                              <p>Inclusos todos os pedidos (abertos, fechados e cancelados)</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div>
+                          <span class="bg-light-primary icon-shape icon-xl rounded-3 text-dark-primary icon"><i class="fa-solid fa-sort-up c-icon"></i></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-lg-6 col-md-12 col-12">
+                <!-- Card Orders -->
+                <div class="card mb-4">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-9 col-xxl-9">
+                        <span class="badge text-bg-secondary">Tipo Pedido</span>
+                      </div>
+                      <div class="mt-2 d-flex justify-content-between">
+                        <div class="lh-1">
+                          <div class="mt-2 d-flex">
+                            <div class="mb-4 p-0 custom-text">
+                              <p class="">Delivery: <span class="ms-2 badge badge-secondary">{{orderDelivery.length}}</span></p>
+                              <p class="">Mesa:  <span class="ms-2 badge badge-secondary">{{orderTable.length}}</span></p>
+                            </div>
+                          </div>
+                        </div>
+                        <div>
+                          <span class="bg-light-primary icon-shape icon-xl rounded-3 text-dark-primary icon"><i class="fa-solid fa-receipt c-icon" style="color: #ff0000;"></i></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-lg-6 col-md-12 col-12">
+                <!-- Card -->
+                <div class="card mb-4">
+                  <!-- Card Body -->
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-9 col-xxl-9">
+                        <span class="badge text-bg-secondary">Meu Cardápio</span>
+                      </div>
+                      <div class="col-3 col-xxl-3 text-end">
+                        <a tabindex="0" class="custom" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="O que é ticket médio?" data-bs-content="Ticket médio é todas suas vendas dividas pelo número totais de pedidos"><i class="fa-regular fa-circle-question"></i></a>
+                      </div>
+                    </div>
+                    <div class="mt-2 d-flex justify-content-between align-items-center">
+                      <div class="lh-1">
+                        <div class="mt-2 d-flex">
+                          <div class="mb-4 p-0 custom-text">
+                            <p class="">Ativos: <span class="ms-2 badge badge-secondary">{{productActive.length}}</span></p>
+                            <p class="">Desativados:  <span class="ms-2 badge badge-secondary">{{productDeactivate.length}}</span></p>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <span class="bg-light-success icon-shape icon-xl rounded-3 text-dark-success"><i class="fa-solid fa-hand-holding-dollar c-icon"></i></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-lg-6 col-md-12 col-12">
+                <!-- Card -->
+                <div class="card mb-4">
+                  <!-- Card Body -->
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-9 col-xxl-9">
+                        <span class="badge text-bg-secondary">Delivery</span>
+                      </div>
+                      <div class="col-3 col-xxl-3 text-end">
+                        <a tabindex="0" class="custom" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Dismissible popover" data-bs-content="And here's some amazing content. It's very engaging. Right?"><i class="fa-regular fa-circle-question"></i></a>
+                      </div>
+                    </div>
+                    <div class="mt-2 d-flex justify-content-between align-items-center">
+                      <div class="lh-1">
+                        <h2 class="h1 fw-bold mb-4">Status:</h2>
+                        <span class="badge badge-pill badge-success">Online</span>
+                      </div>
+                      <div>
+                        <span class="bg-light-info icon-shape icon-xl rounded-3 text-dark-info"><i class="fa-solid fa-motorcycle c-icon" style="color: #ff0000;"></i></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-       </div>
-     </div>
-     <table>
-      <tbody>
-        <tr >
-          <td>
-            <i class="fa-solid fa-receipt"></i>
-          </td>
-          <td>
-            
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    
+      </main>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-12 col-xxl-3 mb-4">
+      <div class="custom-bg h-100 mb-3">
+        <ul class="list-group ms-3">
+          <li class="list-group-item d-flex">
+            <div class="justify-content-start mt-4">
+              <p>Filtre sua Busca</p>
+              <input class="form-check-input me-1" type="checkbox" value="" id="firstCheckbox" checked [(ngModel)]="isCheckedAll">
+              <label class="form-check-label" for="firstCheckbox">Pedidos Abertos<span class="badge text-bg-secondary ms-3">{{orderOpen.length}}</span></label>
+            </div>
+            <div class="justify-content-end">
+              <i class="fa-solid fa-clock-rotate-left" style="color: #ff0000;"></i>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <input class="form-check-input me-1" type="checkbox" value="" id="secondCheckbox" [(ngModel)]="isCheckedClose">
+            <label class="form-check-label" for="secondCheckbox">Pedidos Fechados<span class="badge text-bg-secondary ms-3">{{orderClose.length}}</span></label>
+          </li>
+          <li class="list-group-item">
+            <input class="form-check-input me-1" type="checkbox" value="" id="thirdCheckbox" [(ngModel)]="isCheckedCanceled">
+            <label class="form-check-label" for="thirdCheckbox">Pedidos Cancelados<span class="badge text-bg-secondary ms-3">{{orderCanceled.length}}</span></label>
+          </li>
+          <li class="list-group-item">
+            <input class="form-check-input me-1" type="checkbox" value="" id="thirdCheckbox" [(ngModel)]="isCheckedCanceled">
+            <label class="form-check-label" for="thirdCheckbox">Pedidos em Preparo<span class="badge text-bg-secondary ms-3">{{orderPreparation.length}}</span></label>
+          </li>
+        </ul>
+        <div class="row">
+          <div class="col d-flex flex-column">
+            <div class="mt-4 ms-4">
+              <p>Tipo de pedido:</p>
+              <div class="custom-mobile">
+                <div class="btn-group mt-0" role="group" aria-label="Basic radio toggle button group">
+                  <label class="btn btn-outline-primary" for="btnradio1">Todos</label>
+                  <input type="checkbox" class="btn-check" name="btnradio" id="btnradio1" value="" [(ngModel)]="isCheckedTable" checked>
+                  <label class="btn btn-outline-primary" for="btnradio2">Mesa</label>
+                  <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" value=""  [(ngModel)]="isCheckedDelivery">
+                  <label class="btn btn-outline-primary" for="btnradio3">Delivery</label>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="row">
+        <div class="col-7 col-md-4 col-xxl-3 custom-title ms-3">
+          <h2>Meus Pedidos 🔥</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+        </div>
+      </div>
+      <div class="custom-table">
+        <div class="mb-2 d-flex justify-content-between align-items-center pt-2 ms-2 custom-filter">
+          <div class="position-relative custom-placeholder a">
+            <span class="position-absolute search"><i class="fa fa-search"></i></span>
+            <input class="form-control w-100  bg-custom" placeholder="Busque o pedido">
+          </div>
+          <div class="px-2 custom-btn-link justify-content-end mt-2">
+            <span><a href="." class="custom-link" id="btn-close-order">Fechar Pedido <i class="fa-solid fa-arrow-right"></i></a> </span>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-responsive table-borderless ms-3 fixed-header">
+            <thead class="fixed-header">
+              <tr class="bg-custom" >
+                <th scope="col" width="5%"><input class="form-check-input" type="checkbox"></th>
+                <th scope="col" width="5%">ID</th>
+                <th scope="col" width="10%">Tipo</th>
+                <th scope="col" width="10%">Status</th>
+                <th scope="col" width="15%">Pedidos</th>
+                <th scope="col" width="10%">Total</th>
+                <th scope="col" width="10%">Histórico</th>
+                <th scope="col" width="10%">Detalhes</th>
+              </tr>
+            </thead>
+            <tbody>
+              @if (!data$) {
+              <div class="text-center">
+                <div class="spinner-border" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+              }
+              @if (isCheckedAll) {
+              @for (order of orderOpen; track $index) {
+              <tr>
+                <td scope="row">
+                  <input class="form-check-input" type="checkbox">
+                </td>
+                <td>{{$index +1}}</td>
+                <td>
+                  <span class="badge">{{order.type_order}}</span>
+                <td>
+                  @switch (order.status) {
+                  @case ('OPEN') {
+                  <div>
+                    <i class="fa-solid fa-stopwatch" style="color: red;"></i>
+                    <span class="ms-1">Aberto</span>
+                  </div>
+                  }
+                  }     
+                </td>
+                <td>
+                  <div class="custom-p">
+                    @for (item of order.items; track $index) {
+                    <p>{{ item.menu_item_name }} - {{ item.quantity }}x</p>
+                    }
+                  </div>
+                </td>
+                <td><span class="badge" style="background-color: transparent !important; border: solid 1px red; color: red !important;">R${{order.total}}</span></td>
+                <td>
+                  <div class="custom-p">
+                    @if (order.status === 'OPEN') {
+                    <p>Aberto: {{ order.open_timestamp | date:'HH:mm' }}</p>
+                    }
+                    @else if (order.status === 'PREPARATION') {
+                    <p>Aberto: {{ order.open_timestamp | date:'HH:mm' }}</p>
+                    <p>Em Preparo: {{ order.preparation_timestamp | date:'HH:mm' }}</p>
+                    }
+                    @else if (order.status === 'READY') {
+                    <p>Aberto: {{ order.open_timestamp | date:'HH:mm' }}</p>
+                    <p>Em Preparo: {{ order.preparation_timestamp | date:'HH:mm' }}</p>
+                    <p>Pronto: {{ order.ready_timestamp | date:'HH:mm' }}</p>
+                    }
+                    @else if (order.status === 'CLOSED') {
+                    <p>Aberto: {{ order.open_timestamp | date:'HH:mm' }}</p>
+                    <p>Em Preparo: {{ order.preparation_timestamp | date:'HH:mm' }}</p>
+                    <p>Pronto: {{ order.ready_timestamp | date:'HH:mm' }}</p>
+                    <p>Fechado: {{ order.closed_timestamp | date:'HH:mm' }}</p>
+                    }
+                    @else if (order.status === 'CANCELED') {
+                    <p>Aberto: {{ order.open_timestamp | date:'HH:mm' }}</p>
+                    <p>Cancelado: {{ order.preparation_timestamp | date:'HH:mm' }}</p>
+                    }
+                  </div>
+                </td>
+                <td>
+                  <div class="wrap">
+                    <a href="" class="button" data-bs-toggle="modal" [attr.data-bs-target]="'#model-order'+ $index"><i class="fa-regular fa-file-lines"></i></a>
+                  </div>
+                </td>
+              </tr>
+              }
+              }
+              @else if (isCheckedClose) {
+              @for (order of orderClose; track $index) {
+              <tr>
+                <td scope="row">
+                  <input class="form-check-input" type="checkbox">
+                </td>
+                <td>{{$index +1}}</td>
+                <td>
+                  <span class="badge">{{order.type_order}}</span>
+                <td>
+                  @switch (order.status) {
+                  @case ('OPEN') {
+                  <div>
+                    <i class="fa-solid fa-stopwatch" style="color: red;"></i>
+                    <span class="ms-1">Aberto</span>
+                  </div>
+                  }
+                  @case ('PREPARATION') {
+                  <div>
+                    <i class="fa-solid fa-fire-flame-curved" style="color: #ff0000;"></i>
+                    <span class="ms-1">Preparando</span>
+                  </div>
+                  }
+                  @case ('READY') {
+                  <div>
+                    <i class="fa-solid fa-circle-check" style="color: #ff0000;"></i>
+                    <span class="ms-1">Pronto</span>
+                  </div>
+                  }
+                  @case ('CANCELED') {
+                  <div>
+                    <i class="fa-solid fa-circle-check" style="color: #ff0000;"></i>
+                    <span class="ms-1">Pronto</span>
+                  </div>
+                  }
+                  @case ('CLOSED') {
+                  <div>
+                    <i class="fa-solid fa-circle-check" style="color: #d6d6d6;"></i>
+                    <span class="ms-1">Fechado</span>
+                  </div>
+                  }
+                  }     
+                </td>
+                <td>
+                  <div class="custom-p">
+                    @for (item of order.items; track $index) {
+                    <p>{{ item.menu_item_name }} - {{ item.quantity }}x</p>
+                    }
+                  </div>
+                </td>
+                <td><span class="badge" style="background-color: transparent !important; border: solid 1px red; color: red !important;">R${{order.total}}</span></td>
+                <td>
+                  <div class="custom-p">
+                    @switch (order.status) {
+                    @case ('OPEN') {
+                    <p>Aberto: {{ order.open_timestamp | date:'HH:mm' }}</p>
+                    }
+                    @case ('PREPARATION') {
+                    <p>Aberto: {{ order.open_timestamp | date:'HH:mm' }}</p>
+                    <p>Em Preparo: {{ order.preparation_timestamp | date:'HH:mm' }}</p>
+                    }
+                    @case ('READY') {
+                    <p>Aberto: {{ order.open_timestamp | date:'HH:mm' }}</p>
+                    <p>Em Preparo: {{ order.preparation_timestamp | date:'HH:mm' }}</p>
+                    <p>Pronto: {{ order.ready_timestamp | date:'HH:mm' }}</p>
+                    }
+                    @case ('CLOSED') {
+                    <p>Aberto: {{ order.open_timestamp | date:'HH:mm' }}</p>
+                    <p>Em Preparo: {{ order.preparation_timestamp | date:'HH:mm' }}</p>
+                    <p>Pronto: {{ order.ready_timestamp | date:'HH:mm' }}</p>
+                    <p>Fechado: {{ order.closed_timestamp | date:'HH:mm' }}</p>
+                    }  
+                    @case ('CANCELED') {
+                    <p>Aberto: {{ order.open_timestamp | date:'HH:mm' }}</p>
+                    <p>Cancelado: {{ order.preparation_timestamp | date:'HH:mm' }}</p>
+                    }
+                    }
+                  </div>
+                </td>
+                <td>
+                  <div class="wrap">
+                    <a href="" class="button" data-bs-toggle="modal" [attr.data-bs-target]="'#model-order'+ $index"><i class="fa-regular fa-file-lines"></i></a>
+                  </div>
+                </td>
+              </tr>
+              }
+              }
+              @else if (isCheckedCanceled) {
+              @for (item of orderCanceled; track $index) {
+              <tr>
+                <td scope="row"><input class="form-check-input" type="checkbox"></td>
+                <td class="badge" id="badge-table">{{item.type_order}}</td>
+                <td>
+                  @switch (item.status) {
+                  @case ('Aberto') {
+                  <div>
+                    <i class="fa-solid fa-stopwatch" style="color: red;"></i>
+                    <span class="ms-1">{{ item.status }}</span>
+                  </div>
+                  }
+                  @case ('Fechado') {
+                  <div>
+                    <i class="fa-solid fa-circle-check" style="color: #d6d6d6;"></i>
+                    <span class="ms-1">{{ item.status }}</span>
+                  </div>
+                  }
+                  @case ('Cancelado') {
+                  <div>
+                    <i class="fa-solid fa-ban" style="color: #ff0000;"></i>
+                    <span class="ms-1">{{ item.status }}</span>
+                  </div>
+                  }
+                  }
+                </td>
+                <td><i class="fa-solid fa-receipt"></i><span class="custom-span text-light"></span></td>
+                <td style="font-size: 9pt;">{{ item.menu_item }}</td>
+                <td>{{ item.date | date }}</td>
+              </tr>
+              }}
+              @else if (isCheckedDelivery) {
+              @for (item of orderDelivery; track $index) {
+              <tr>
+                <td scope="row"><input class="form-check-input" type="checkbox"></td>
+                <td>{{ item.date | date }}</td>
+                <td>
+                  <div>
+                    <i class="fa-solid fa-ban" style="color: #ff0000;"></i>
+                    <span class="ms-1">{{ item.status }}</span>
+                  </div>
+                </td>
+                <td><i class="fa-solid fa-receipt"></i><span class="custom-span text-light"></span></td>
+                <td style="font-size: 9pt;">{{ item.menu_item }}</td>
+                <td>aa</td>
+              </tr>
+              }}
+              @else {
+              @for (order of data$ |async; track $index) {
+              <tr>
+                <td scope="row">
+                  <input class="form-check-input" type="checkbox">
+                </td>
+                <td>{{$index +1}}</td>
+                <td>
+                  <span class="badge">{{order.type_order}}</span>
+                  <td>
+                    <div class="box">
+                      <select [(ngModel)]="order.status" (ngModelChange)="onSelectChange($event)">
+                        <option value="OPEN"><i class="fa-solid fa-stopwatch" style="color: red;"></i> Aberto</option>
+                        <option value="PREPARATION">Preparando</option>
+                        <option value="READY">Pronto</option>
+                        <option value="CLOSED">Fechado</option>
+                        <option>Cancelar</option>
+                      </select>
+                    </div>
+                  </td>
+                  
+                  
+                <td><span class="badge" style="background-color: transparent !important; border: solid 1px red; color: red !important;">R${{order.total}}</span></td>
+                <td>
+                  <div class="custom-p">
+                    @if (order.status === 'OPEN') {
+                    <p>Aberto: {{ order.open_timestamp | date:'HH:mm' }}</p>
+                    }
+                    @else if (order.status === 'PREPARATION') {
+                    <p>Aberto: {{ order.open_timestamp | date:'HH:mm' }}</p>
+                    <p>Em Preparo: {{ order.preparation_timestamp | date:'HH:mm' }}</p>
+                    }
+                    @else if (order.status === 'READY') {
+                    <p>Aberto: {{ order.open_timestamp | date:'HH:mm' }}</p>
+                    <p>Em Preparo: {{ order.preparation_timestamp | date:'HH:mm' }}</p>
+                    <p>Pronto: {{ order.ready_timestamp | date:'HH:mm' }}</p>
+                    }
+                    @else if (order.status === 'CLOSED') {
+                    <p>Aberto: {{ order.open_timestamp | date:'HH:mm' }}</p>
+                    <p>Em Preparo: {{ order.preparation_timestamp | date:'HH:mm' }}</p>
+                    <p>Pronto: {{ order.ready_timestamp | date:'HH:mm' }}</p>
+                    <p>Fechado: {{ order.closed_timestamp | date:'HH:mm' }}</p>
+                    }
+                    @else if (order.status === 'CANCELED') {
+                    <p>Aberto: {{ order.open_timestamp | date:'HH:mm' }}</p>
+                    <p>Cancelado: {{ order.preparation_timestamp | date:'HH:mm' }}</p>
+                    }
+                  </div>
+                </td>
+                <td>
+                  <div class="wrap">
+                    <a href="" class="button" data-bs-toggle="modal" [attr.data-bs-target]="'#model-order'+ $index"><i class="fa-regular fa-file-lines"></i></a>
+                  </div>
+                </td>
+              </tr>
+              
+              }
+              
+              
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<table>
+  <tbody>
+    <tr >
+      <td>
+        <i class="fa-solid fa-receipt"></i>
+      </td>
+      <td>
+      </td>
+    </tr>
+  </tbody>
+</table>
+@for (item of data$ | async; track $index) {
+<div class="modal fade" [id]="'model-order' + $index" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="border-radius: 25px; border:none;">
+      <div class="modal-header">
+        
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="invoice">
+          <div class="header">
+            <h1 style="color: rgb(90, 90, 90); font-size: 30px; font-weight: 500;">Detalhes do Pedido</h1>
+            <p>Data: 25 de Abril de 2024</p>
+          </div>
+          <div class="teste">
+              <p class="mb-1">#Pedido: {{item.id}}</p>
+              @if (item.type_order === 'Delivery') {
+              <div class="details mt-0">
+                <span class="badge mb-2">{{item.type_order}}</span>
+                <h2>Cliente</h2>
+                <p>Nome: João da Silva</p>
+                <p>Telefone: joaoexample.com</p>
+                <p>Endereço: joaoexample.com</p>
+                <p>Complemento: joaoexample.com</p>
+                <p>Observação: joaoexample.com</p>
+              </div>
+              }
+              <div class="details" style="border-bottom: solid 1px rgb(211, 211, 211);">
+                <h2>Itens do Pedido</h2>
+                @for (item of item.items; track $index) {
+                <p class="mb-3">{{ item.quantity }}x - {{ item.menu_item_name }} | R$ {{item.menu_item_price | currency: 'BRL' }}</p>
+                }
+              </div>
+              <div class="details" style="border-bottom: solid 1px rgb(211, 211, 211);">
+                <h2>Histórico do Pedido</h2>
+                <div class="custom-p mb-4">
+                  @if (item.status === 'OPEN') {
+                  <p>Aberto: {{ item.open_timestamp | date:'HH:mm' }}</p>
+                  }
+                  @else if (item.status === 'PREPARATION') {
+                  <p>Aberto: {{ item.open_timestamp | date:'HH:mm' }}</p>
+                  <p>Em Preparo: {{ item.preparation_timestamp | date:'HH:mm' }}</p>
+                  }
+                  @else if (item.status === 'READY') {
+                  <p>Aberto: {{ item.open_timestamp | date:'HH:mm' }}</p>
+                  <p>Em Preparo: {{ item.preparation_timestamp | date:'HH:mm' }}</p>
+                  <p>Pronto: {{ item.ready_timestamp | date:'HH:mm' }}</p>
+                  }
+                  @else if (item.status === 'CLOSED') {
+                  <p>Aberto: {{ item.open_timestamp | date:'HH:mm' }}</p>
+                  <p>Em Preparo: {{ item.preparation_timestamp | date:'HH:mm' }}</p>
+                  <p>Pronto: {{ item.ready_timestamp | date:'HH:mm' }}</p>
+                  <p>Fechado: {{ item.closed_timestamp | date:'HH:mm' }}</p>
+                  }
+                  @else if (item.status === 'CANCELED') {
+                  <p>Aberto: {{ item.open_timestamp | date:'HH:mm' }}</p>
+                  <p>Cancelado: {{ item.preparation_timestamp | date:'HH:mm' }}</p>
+                  }
+                </div>
+                <div class="details" style="border-bottom: solid 1px rgb(211, 211, 211);">
+                  <h2>Forma Pagamento</h2>
+                  <div class="mb-4 mt-3">
+                    <span class="badge-border ms-2 mt-2" (click)="selectMethod('Cartão Débito', '')">Cartão Débito</span>
+                    <span class="badge-border ms-2 mt-2"(click)="selectMethod('Cartão Crédito','')">Cartão Crédito</span>
+                    <span class="badge-border ms-2 mt-2" (click)="selectMethod('Refeição','')">Refeição</span>
+                    <span class="badge-border ms-2 mt-2" (click)="selectMethod('Pix','')">Pix</span>
+                    <span class="badge-border ms-2 mt-2" (click)="selectMethod('Dinheiro', item.total)">Dinheiro</span>
+                  </div>
+                </div>
+              </div>
+              <div>
+            </div>
+            <div class="mt-2">
+              <p class="mb-1">Forma de pagamento:</p>
+              <span class="badge mb-2">{{selectedMethod}}</span>
 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#model-order">
-  Launch demo modal
-</button>
+
+            </div>
+          </div>
+          <div class="total">
+            <h2 class="mb-2">Total</h2>
+            <span class="badge" style="padding: 10px 10px !important; font-size: 14px;">R$ {{item.total}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer mt-2 mb-0">
+        <button type="button" class="custom-btn-all-border" data-bs-dismiss="modal">Imprimir</button>
+        <button type="button" class="custom-btn-all">Fechar Pedido</button>
+      </div>
+    </div>
+  </div>
+</div>
+}
 
 
-    <app-model-order/>
-
-    

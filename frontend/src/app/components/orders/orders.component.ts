@@ -64,14 +64,17 @@ export class OrdersComponent {
   minutesPassed: number = 0;
   secondsPassed: number = 0;
   ordersWithCounters: any[] = [];
-
-
-
+  idOrder: number = 0;
+  selectedMethod: string = '';
+  selectedOption: string = '';
   constructor(private FinancialService: FinancialService, private ngZone: NgZone){}
 
   ngOnInit(): void {
     this.getMenu();
     this.getOrders();
+    console.log(this.selectedOption)
+    
+    
 
  
     
@@ -99,13 +102,13 @@ export class OrdersComponent {
   getOrders() {
     this.data$ = this.FinancialService.getOrdersService(false);
     this.data$.subscribe((orders: modelOrders[]) => {
+      this.totalSales = orders.length
+      orders.forEach(item =>{
+        this.selectedOption = item.status
 
-      this.ordersWithCounters = orders.map((order: modelOrders) => {
-        return {
-          ...order,
-          counter: this.initializeCounter(order)
-        };
-      });
+
+      })
+   
   
       this.orderOpen = this.ordersWithCounters.filter((order: modelOrders) => order.status === TransactionStatus.Aberto);
       this.orderClose = this.ordersWithCounters.filter((order: modelOrders) => order.status === TransactionStatus.Fechado);
@@ -117,23 +120,23 @@ export class OrdersComponent {
     });
     
   }
-  initializeCounter(order: modelOrders): Observable<string> {
-    const time = new Date(order.open_timestamp);
-    const currentTime = new Date();
-  
-    const timer$ = timer(0, 1000).pipe(
-      map(() => {
-        const differenceMs = new Date().getTime() - time.getTime();
-        const totalSeconds = Math.floor(differenceMs / 1000);
-        const minutesPassed = Math.floor(totalSeconds / 60);
-        const secondsPassed = totalSeconds % 60;
-        return `${minutesPassed.toString().padStart(2, '0')}:${secondsPassed.toString().padStart(2, '0')}`;
-      })
-    );
-  
-    return timer$;
-  }
 
+
+
+  selectMethod(method: string, total: string) {
+    
+    if (method === null) {
+      return;
+  }
+  this.selectedMethod = method;
+
+}
+
+
+onSelectChange(value: string) {
+  this.selectedOption = value; 
+  console.log(this.selectedOption); 
+}
 
 
 }
