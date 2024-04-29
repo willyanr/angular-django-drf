@@ -1,12 +1,13 @@
-import { get } from 'http';
+
 import { Injectable } from '@angular/core';
-import { modelMenu } from '../models/financial.model';
 import { Observable, of, tap } from 'rxjs';
+
+
 
 
 interface CacheContent {
     expiry: number;
-    cached: modelMenu;
+    cached: any;
   }
 
   
@@ -16,51 +17,49 @@ interface CacheContent {
   export class CacheService {
     private cache = new Map<string, CacheContent>(); 
 
-    setCache(key: string, cached: modelMenu, timer: number = 600000): Observable<any> { 
-        if (this.cache.has(key)){
-            throw new Error(`Data already exists for key '${key}'. Use a different key or delete the existing one first.`);
-        }
-        const expiry = new Date().getTime() + timer;
-        this.cache.set(key, { expiry, cached });
-        return of(cached);
+
+    getCache(key: string): Observable<any> | undefined {
+      const data = this.cache.get(key);
+      if (!data) {
+        return undefined;
       }
-
-
-
-    getCache(key: string): Observable <modelMenu> | null  {
-        const isCached = this.cache.get(key);
-        
-        if (!isCached){
-            return null;
-        }
-
-        const now = new Date().getTime();
-        const isExpired = now > isCached.expiry;
-        
-        if (isExpired) {
+    
+      const now = new Date().getTime();
+      if (now > data.expiry) {
         this.cache.delete(key);
-
-        }
-
-        return of(isCached.cached)
-
+        return undefined;
+      }
+    
+      return of(data.cached);
     }
+    
+      
 
-    cacheObservable(key: string, fallback: Observable<modelMenu>): Observable<modelMenu> | undefined {
-        const cached = this.getCache(key);
-
-        if(cached){
-            return;
-        }
-        else{
-            return fallback.pipe(
-                tap(cached => {
-                    this.setCache(key,cached)
-                })
-            )
+    setCache(key: string, cached: any, timer: number = 600000): Observable<any> {
+      if (this.cache.has(key)){
+          throw new Error(`Chave já existe'${key}`);
+      }
+  
+      const expiry = new Date().getTime() + timer;
+      this.cache.set(key, { expiry, cached });
 
 
-        }
-
-    }
+      return of(cached);
   }
+  
+    
+
+    cacheObservable(key: string, fallback: Observable<any>, timer?: number): Observable<any> {
+      const cached = this.getCache(key);
+      console.log('foi usado a chave', key, 'e o retorno foi', cached)
+      if (cached) {
+        return cached;
+      } else {
+        return fallback.pipe(
+          tap(cached => {
+            this.setCache(key, cached, timer);
+          })
+        );
+      }
+    }
+    }
