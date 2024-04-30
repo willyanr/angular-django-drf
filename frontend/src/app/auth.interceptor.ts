@@ -16,6 +16,7 @@ export class AuthInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+
     if (typeof window !== 'undefined') {
       let token = localStorage.getItem('token');
       if (token !== null) {
@@ -27,6 +28,9 @@ export class AuthInterceptor implements HttpInterceptor {
         const url = request.url 
         return next.handle(authRequest)
         
+      }else{
+        console.log('houve um erro')
+
       }
     }
     return next.handle(request);

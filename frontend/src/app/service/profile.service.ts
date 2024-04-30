@@ -9,19 +9,14 @@ import { modelProfile } from '../models/financial.model';
 })
 export class ProfileService {
 
-  private apiUrl = 'http://127.0.0.1:8000/api/profile/'
+
 
 
 
   constructor(private httpClient: HttpClient) { }
 
 
-  getProfile(): Observable <modelProfile[]> {
-    
-    return this.httpClient.get<modelProfile[]>(this.apiUrl);
 
-
-  }
  
 
 }

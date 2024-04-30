@@ -1,10 +1,11 @@
+import { CacheService } from './cache.service';
 
 import { HttpClient, HttpParams  } from '@angular/common/http';
-import { Injectable } from "@angular/core";
-import { modelBox, modelFinancial, modelMenu, modelTransations, modelCategory, modelOrders} from '../models/financial.model';
+import { Injectable, inject } from "@angular/core";
+import { modelBox, modelFinancial, modelMenu, modelTransations, modelCategory, modelOrders, modelProfile} from '../models/financial.model';
 import { environment } from '../environments/environment'; 
 import { Observable, shareReplay } from 'rxjs';
-import { ObserversModule } from '@angular/cdk/observers';
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class FinancialService {
     private user: any;
   
     private url = environment.apiUrl
+    cacheService = inject(CacheService);
 
     constructor(private httpClient: HttpClient) { }
 
@@ -32,13 +34,45 @@ export class FinancialService {
     }
 
 
-    obterMenu(){
-      return this.httpClient.get<modelMenu[]>('http://127.0.0.1:8000/api/menu/')
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    obterMenu(): Observable<any> {
+      const key = 'menu'; 
+      return this.cacheService.cacheObservable(key, this.httpClient.get<modelMenu[]>('http://127.0.0.1:8000/api/menu/').pipe(shareReplay()));
     }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
 
 
 
@@ -78,12 +112,13 @@ export class FinancialService {
       return this.httpClient.put<modelMenu>('http://127.0.0.1:8000/api/menu/' + menu.id + '/', menu);
     }
     
-    getListCategory(){
-      return this.httpClient.get<modelCategory[]>('http://127.0.0.1:8000/api/category/');
 
-
-
+    getListCategory(): Observable<any> {
+      const key = 'category'; 
+      return this.cacheService.cacheObservable(key, this.httpClient.get<modelCategory[]>('http://127.0.0.1:8000/api/category/').pipe(shareReplay()));
     }
+
+  
     createCategory(menu: modelCategory): Observable<modelCategory> {
       return this.httpClient.post<modelCategory>('http://127.0.0.1:8000/api/category/', menu);
     }
@@ -109,7 +144,12 @@ export class FinancialService {
     }
 
 
+    getProfile(): Observable <modelProfile[]> {
     
+      return this.httpClient.get<modelProfile[]>('http://127.0.0.1:8000/api/profile/');
+  
+  
+    }
   
 
 

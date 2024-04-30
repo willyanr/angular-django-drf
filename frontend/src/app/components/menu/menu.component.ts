@@ -1,11 +1,13 @@
 
 import { FinancialService } from './../../service/financial.service';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { Observable } from 'rxjs';
 import { modelCategory, modelMenu } from '../../models/financial.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CacheService } from '../../service/cache.service';
+import { get } from 'http';
 
 
 
@@ -69,69 +71,78 @@ export class MenuComponent {
   filteredProducts: modelMenu[] = [];
   searchCheck: boolean = false;
   feedBack: string = '';
+  cached: any[] = [];
+  cachedMenu: modelMenu[] = [];
+  cacheService = inject(CacheService);
+
+  loading: boolean = false;
 
   constructor(private FinancialService: FinancialService){}
+  
+  
+  
   ngOnInit(): void {
     this.getMenu();
     this.getCategory();
-    console.log(this.inputSearchProduct)
+    
+    
+    
 
 
   }
-
 
   getMenu() {
-    this.menu$ = this.FinancialService.obterMenu();
-    this.menu$.subscribe(response => {
-      const uniqueCategories = Array.from(new Set(response.map(item => item.category)));
-      const categories = uniqueCategories.map(categoryId => {
-        const categoryName = response.find(item => item.category === categoryId)?.category_name || ''; 
-        this.categoryNamesMap[categoryId] = categoryName; 
-        return categoryId; 
-      });
-  
-      response.forEach(data => {
-        const cost: number = data.cost!;
-        const price: number = data.price;
-  
-        if (cost > 0) {
-          const calculate = ((price - cost) / cost) * 100;
-          data.profitMargin = calculate;
-          
-          
-        } else {
-          data.profitMargin = 0;
-   
-        }
-      });
-  
-      this.categories = categories; 
+    this.loading = true;
+    this.FinancialService.obterMenu().subscribe(data => {
 
+      if (data) {
+        this.cachedMenu = data;
+        console.log('funcionou', this.cachedMenu);
+        const uniqueCategories: string[] = [];
+        data.forEach((item: modelMenu) => {
+          if (!uniqueCategories.includes(item.category)) {
+            uniqueCategories.push(item.category);
+            const categoryName = data.find((menuItem: modelMenu) => menuItem.category === item.category)?.category_name || '';
+            this.categoryNamesMap[item.category] = categoryName;
+          }
+        });
+  
+        data.forEach((data: modelMenu) => {
+          const cost: number = data.cost!;
+          const price: number = data.price;
+  
+          if (cost > 0) {
+            const calculate = ((price - cost) / cost) * 100;
+            data.profitMargin = calculate;
+          } else {
+            data.profitMargin = 0;
+          }
+        });
+  
+        const categories = uniqueCategories;
+        this.categories = categories;
+        this.loading = false;
+      } else {
+        console.error('Erro ao obter os dados do menu');
+        this.loading = false;
+      }
     });
   }
   
-  searchProduct() {
-    const productName = this.inputSearchProduct.trim().toLowerCase(); 
-    if (!productName) {
-        this.filteredProducts = [];
-        return;
-    }
-    this.menu$.subscribe(response => {
-        const filteredProducts = response.filter(item => item.name.toLowerCase().includes(productName));
-        if (filteredProducts.length > 0){
-          this.filteredProducts = filteredProducts
-          this.searchCheck = true
-        }else{
-          this.feedBack = 'Produto não encontrado'
-          this.alertError = true
-          this.searchCheck = false
-          setTimeout(() => {
-            this.alertError = false;
-          }, 4000);         
-        }
-        this.searchCheck = false
-    });
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   createCategoryMenu() {
@@ -200,7 +211,7 @@ createProductMenu() {
       this.closeModal();
       this.feedBack = 'Produto criado com sucesso!'
       this.alertaSucesso = true;
-      this.getMenu();
+
       this.getCategory();
 
     setTimeout(() => {

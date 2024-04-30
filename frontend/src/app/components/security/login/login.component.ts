@@ -42,7 +42,7 @@ export class LoginComponent {
 
   constructor(private loginService: LoginService, private router: Router, private FinancialService: FinancialService) { }
   ngOnInit(): void {
- 
+    this.loginOn();
 
     
   }
@@ -59,22 +59,28 @@ export class LoginComponent {
     })
   }
   
+
+
   loginOn() {
     const loginData: modelLogin = {
       username: this.username,
       password: this.password
     };
-
+  
     this.loginService.login(loginData).subscribe(response => {
       const data = response;
       if (data && data.access) {
-        let token = localStorage.setItem('token', data.access);
-        this.router.navigate(['/caixa']);
+        if (typeof window !== 'undefined' && localStorage !== null && localStorage !== undefined) {
+          localStorage.setItem('token', data.access);
+          this.router.navigate(['/caixa']);
+        } else {
+          console.log('localStorage não está disponível.');
+          this.router.navigate(['/login']);
+        }
       } else {
-
         this.router.navigate(['/login']);
       }
     });
   }
-}
 
+}

@@ -104,6 +104,7 @@ export interface modelTransations {
     menu_item_name: string;
     items: any;
     total: string;
+    menu_item_price: number;
 
 
   }

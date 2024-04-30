@@ -1,0 +1,11 @@
+services:
+  angular:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
+    volumes:
+      - .:/project
+    environment:
+      - NODE_VERSION=22.0.0

@@ -59,6 +59,17 @@ import { Router, NavigationEnd } from '@angular/router';
 export class AppComponent{
   constructor(private router: Router) {}
 
+  ngOnInit() {
+
+    const token = localStorage.getItem('token');
+
+
+    if (!token) {
+      this.router.navigate(['/login']);
+    }
+  }
+
+
   isLoginPage(): boolean {
     return this.router.url === '/login' || this.router.url === '/home' || this.router.url ==='';
   }

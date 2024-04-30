@@ -12,7 +12,7 @@
             </div>
             <form class="d-flex w-50 mb-3 custom-search" role="search">
                <input class="form-control me-2" type="search" aria-label="Search" [(ngModel)]="inputSearchProduct" placeholder="Digite sua busca aqui" name="name-ss" />
-               <button class="btn" type="submit" (click)="searchProduct()">Buscar</button>
+              
             </form>
             <div class="row">
                <div class="container mt-2">
@@ -227,7 +227,7 @@
                               </div>
                            </div> <!-- End Delete Product confirm Modal -->
                            <div class="col-12 custom mt-4 mb-5">
-                           @for (item of menu$|async; track $index ) {
+                           @for (item of cachedMenu; track $index ) {
                            <ul class="list list-inline">
                            @if (item.category === category) {
                            <li class="d-flex justify-content-between mb-3 bg-light" >
@@ -294,7 +294,7 @@
                            </div> <!-- End Delete Product confirm Modal -->
                            </li>} 
                            </ul>}
-                           @for (item of menu$|async; track $index){
+                           @for (item of cachedMenu; track $index){
                            <!--Model Edit-->
                            <div class="modal fade" [id]="'confirm-edit-' + $index" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                               <div class="modal-dialog">
@@ -381,3 +381,9 @@
    </div>
 </div>
 }
+
+
+<div *ngFor="let item of cachedMenu">
+   {{ item.name }} - {{ item.category }} - {{ item.price }}
+ </div>
+ 

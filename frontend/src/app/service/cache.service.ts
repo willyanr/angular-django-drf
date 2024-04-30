@@ -20,6 +20,7 @@ interface CacheContent {
 
     getCache(key: string): Observable<any> | undefined {
       const data = this.cache.get(key);
+      console.log('funcao getcache chamada', data)
       if (!data) {
         return undefined;
       }
@@ -49,17 +50,30 @@ interface CacheContent {
   
     
 
-    cacheObservable(key: string, fallback: Observable<any>, timer?: number): Observable<any> {
+  cacheObservable(key: string, fallback: Observable<any>, timer?: number): Observable<any> {
+    if (typeof window !== 'undefined' && localStorage !== null) {
       const cached = this.getCache(key);
-      console.log('foi usado a chave', key, 'e o retorno foi', cached)
+      const token = localStorage.getItem('token');
+  
       if (cached) {
         return cached;
+      } else if (!token) {
+        console.log('Token não encontrado. Redirecionando para a rota de login.');
+
+        return new Observable();
       } else {
+        console.log('Nada em cache. Realizando fallback.');
         return fallback.pipe(
-          tap(cached => {
-            this.setCache(key, cached, timer);
+          tap(cachedData => {
+            this.setCache(key, cachedData, timer);
+            console.log('Cache salvo com sucesso:', cachedData);
           })
         );
       }
+    } else {
+      console.log('localStorage não está disponível.');
+      return new Observable();
     }
-    }
+  }
+
+  }

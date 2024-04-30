@@ -36,7 +36,7 @@ export class CarddashComponent implements OnInit {
   categories$ = new Observable<modelCategory[]>;
   menuItems$ = new Observable<modelMenuItem[]>;
 
-  transations$ = new Observable<modelOrders[]>;
+  orders$ = new Observable<modelOrders[]>;
   alertaSucesso = false;
   alertaSucessoBox = false;
   alertError = false;
@@ -71,7 +71,7 @@ export class CarddashComponent implements OnInit {
     this.obterMenu();
     this.obterCategoria();
     this.Sales();
-    this.Transations();
+    this.getOrdes();
     this.tableSelect();
     console.log('vvvvvvvv', this.sales$)
     
@@ -91,7 +91,7 @@ export class CarddashComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe(_=> {
         
-        this.Transations()
+        this.getOrdes()
        
 
         this.alertaSucesso = true;
@@ -194,13 +194,18 @@ Sales() {
   });
 }
 
-Transations() {
-  this.transations$ = this.FinancialService.getOrdersService(true);
-  this.transations$.subscribe(transactions => {
-    this.total = transactions.reduce((total, transaction) => total + parseFloat(transaction.amount.toString()), 0);
-    this.ticket_m = this.total / transactions.length;
+getOrdes() {
+  let calculeteTotal = 0;
+  this.orders$ = this.FinancialService.getOrdersService(false);
+  this.orders$.subscribe(transactions => {
+    transactions.forEach(item =>{
+      calculeteTotal += parseFloat(item.total);
+    });
+
+    this.total = calculeteTotal;
   });
 }
+
 
 
 tableSelect(){

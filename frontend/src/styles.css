@@ -83,3 +83,49 @@ body{
 
 }
 
+.custom-btn-all{
+  background-color: red;
+  padding: 5px 10px;
+  border-radius: 25px;
+  border: none;
+  color: white;
+
+
+}
+
+.custom-btn-all-border{
+  background-color: transparent;
+  padding: 5px 10px;
+  border-radius: 25px;
+  border: solid 1px red;
+  color: rgb(255, 0, 0);
+
+
+}
+
+.badge-border{
+  background-color: transparent;
+  border: solid 1px rgb(141, 141, 141);
+  border-radius: 25px;
+  font-size: 16px;
+  display: inline-block;
+  padding: .35em .65em;
+  font-weight: 700;
+  line-height: 1;
+  color: #ff0000;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  cursor: pointer;
+  
+
+}
+
+
+.badge-border:hover{
+  background-color: red;
+  color: #ffffff;
+  border: none;
+
+
+}
