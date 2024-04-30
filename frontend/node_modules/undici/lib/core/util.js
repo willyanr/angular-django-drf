@@ -1,14 +1,14 @@
 'use strict'
 
-const assert = require('assert')
+const assert = require('node:assert')
 const { kDestroyed, kBodyUsed } = require('./symbols')
-const { IncomingMessage } = require('http')
-const stream = require('stream')
-const net = require('net')
+const { IncomingMessage } = require('node:http')
+const stream = require('node:stream')
+const net = require('node:net')
 const { InvalidArgumentError } = require('./errors')
-const { Blob } = require('buffer')
-const nodeUtil = require('util')
-const { stringify } = require('querystring')
+const { Blob } = require('node:buffer')
+const nodeUtil = require('node:util')
+const { stringify } = require('node:querystring')
 const { headerNameLowerCasedRecord } = require('./constants')
 const { tree } = require('./tree')
 
@@ -182,12 +182,12 @@ function bodyLength (body) {
   return null
 }
 
-function isDestroyed (stream) {
-  return !stream || !!(stream.destroyed || stream[kDestroyed])
+function isDestroyed (body) {
+  return body && !!(body.destroyed || body[kDestroyed] || (stream.isDestroyed?.(body)))
 }
 
 function isReadableAborted (stream) {
-  const state = stream && stream._readableState
+  const state = stream?._readableState
   return isDestroyed(stream) && state && !state.endEmitted
 }
 
@@ -204,9 +204,9 @@ function destroy (stream, err) {
 
     stream.destroy(err)
   } else if (err) {
-    process.nextTick((stream, err) => {
+    queueMicrotask(() => {
       stream.emit('error', err)
-    }, stream, err)
+    })
   }
 
   if (stream.destroyed !== true) {
@@ -246,27 +246,24 @@ function bufferToLowerCasedHeaderName (value) {
  * @returns {Record<string, string | string[]>}
  */
 function parseHeaders (headers, obj) {
-  // For H2 support
-  if (!Array.isArray(headers)) return headers
-
   if (obj === undefined) obj = {}
   for (let i = 0; i < headers.length; i += 2) {
     const key = headerNameToString(headers[i])
     let val = obj[key]
 
-    if (!val) {
+    if (val) {
+      if (typeof val === 'string') {
+        val = [val]
+        obj[key] = val
+      }
+      val.push(headers[i + 1].toString('utf8'))
+    } else {
       const headersValue = headers[i + 1]
       if (typeof headersValue === 'string') {
         obj[key] = headersValue
       } else {
         obj[key] = Array.isArray(headersValue) ? headersValue.map(x => x.toString('utf8')) : headersValue.toString('utf8')
       }
-    } else {
-      if (typeof val === 'string') {
-        val = [val]
-        obj[key] = val
-      }
-      val.push(headers[i + 1].toString('utf8'))
     }
   }
 
@@ -279,22 +276,30 @@ function parseHeaders (headers, obj) {
 }
 
 function parseRawHeaders (headers) {
-  const ret = []
+  const len = headers.length
+  const ret = new Array(len)
+
   let hasContentLength = false
   let contentDispositionIdx = -1
+  let key
+  let val
+  let kLen = 0
 
   for (let n = 0; n < headers.length; n += 2) {
-    const key = headers[n + 0].toString()
-    const val = headers[n + 1].toString('utf8')
+    key = headers[n]
+    val = headers[n + 1]
 
-    if (key.length === 14 && (key === 'content-length' || key.toLowerCase() === 'content-length')) {
-      ret.push(key, val)
+    typeof key !== 'string' && (key = key.toString())
+    typeof val !== 'string' && (val = val.toString('utf8'))
+
+    kLen = key.length
+    if (kLen === 14 && key[7] === '-' && (key === 'content-length' || key.toLowerCase() === 'content-length')) {
       hasContentLength = true
-    } else if (key.length === 19 && (key === 'content-disposition' || key.toLowerCase() === 'content-disposition')) {
-      contentDispositionIdx = ret.push(key, val) - 1
-    } else {
-      ret.push(key, val)
+    } else if (kLen === 19 && key[7] === '-' && (key === 'content-disposition' || key.toLowerCase() === 'content-disposition')) {
+      contentDispositionIdx = n + 1
     }
+    ret[n] = key
+    ret[n + 1] = val
   }
 
   // See https://github.com/nodejs/node/pull/46528
@@ -349,14 +354,8 @@ function validateHandler (handler, method, upgrade) {
 // A body is disturbed if it has been read from and it cannot
 // be re-used without losing state or data.
 function isDisturbed (body) {
-  return !!(body && (
-    stream.isDisturbed
-      ? stream.isDisturbed(body) || body[kBodyUsed] // TODO (fix): Why is body[kBodyUsed] needed?
-      : body[kBodyUsed] ||
-        body.readableDidRead ||
-        (body._readableState && body._readableState.dataEmitted) ||
-        isReadableAborted(body)
-  ))
+  // TODO (fix): Why is body[kBodyUsed] needed?
+  return !!(body && (stream.isDisturbed(body) || body[kBodyUsed]))
 }
 
 function isErrored (body) {
@@ -438,19 +437,22 @@ function addAbortListener (signal, listener) {
   return () => signal.removeListener('abort', listener)
 }
 
-const hasToWellFormed = !!String.prototype.toWellFormed
+const hasToWellFormed = typeof String.prototype.toWellFormed === 'function'
+const hasIsWellFormed = typeof String.prototype.isWellFormed === 'function'
 
 /**
  * @param {string} val
  */
 function toUSVString (val) {
-  if (hasToWellFormed) {
-    return `${val}`.toWellFormed()
-  } else if (nodeUtil.toUSVString) {
-    return nodeUtil.toUSVString(val)
-  }
+  return hasToWellFormed ? `${val}`.toWellFormed() : nodeUtil.toUSVString(val)
+}
 
-  return `${val}`
+/**
+ * @param {string} val
+ */
+// TODO: move this to webidl
+function isUSVString (val) {
+  return hasIsWellFormed ? `${val}`.isWellFormed() : toUSVString(val) === `${val}`
 }
 
 /**
@@ -499,6 +501,24 @@ function isValidHTTPToken (characters) {
   return true
 }
 
+// headerCharRegex have been lifted from
+// https://github.com/nodejs/node/blob/main/lib/_http_common.js
+
+/**
+ * Matches if val contains an invalid field-vchar
+ *  field-value    = *( field-content / obs-fold )
+ *  field-content  = field-vchar [ 1*( SP / HTAB ) field-vchar ]
+ *  field-vchar    = VCHAR / obs-text
+ */
+const headerCharRegex = /[^\t\x20-\x7e\x80-\xff]/
+
+/**
+ * @param {string} characters
+ */
+function isValidHeaderChar (characters) {
+  return !headerCharRegex.test(characters)
+}
+
 // Parsed accordingly to RFC 9110
 // https://www.rfc-editor.org/rfc/rfc9110#field.content-range
 function parseRangeHeader (range) {
@@ -524,6 +544,7 @@ module.exports = {
   isErrored,
   isReadable,
   toUSVString,
+  isUSVString,
   isReadableAborted,
   isBlobLike,
   parseOrigin,
@@ -549,6 +570,7 @@ module.exports = {
   buildURL,
   addAbortListener,
   isValidHTTPToken,
+  isValidHeaderChar,
   isTokenCharCode,
   parseRangeHeader,
   nodeMajor,

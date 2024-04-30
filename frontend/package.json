@@ -17,7 +17,6 @@
     "@angular/compiler": "^17.1.0",
     "@angular/core": "^17.1.0",
     "@angular/forms": "^17.1.0",
-    "@angular/material": "^17.2.1",
     "@angular/platform-browser": "^17.1.0",
     "@angular/platform-browser-dynamic": "^17.1.0",
     "@angular/platform-server": "^17.1.0",
@@ -26,10 +25,7 @@
     "angular-localstorage": "^1.1.5",
     "angular-web-storage": "^17.0.0",
     "bootstrap": "^5.3.2",
-    "bootstrap-icons": "^1.11.3",
     "express": "^4.18.2",
-    "ngx-scrollbar": "^14.0.0-beta.0",
-    "perfect-scrollbar": "^1.5.5",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

@@ -1,8 +1,8 @@
 # syntax=docker/dockerfile:1.4
-FROM node:22-alpine
+FROM node:20-alpine
 
 # Instalar o Angular CLI globalmente
-RUN npm install -g @angular/cli@
+RUN npm install -g @angular/cli
 
 # Definir o diretório de trabalho
 WORKDIR /project

@@ -1,6 +1,5 @@
 
 import { Component, } from '@angular/core';
-import {MatTableModule} from '@angular/material/table';
 
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
@@ -16,7 +15,7 @@ export interface PeriodicElement {
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [MatTableModule, CommonModule],
+  imports: [CommonModule],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css'
 })
