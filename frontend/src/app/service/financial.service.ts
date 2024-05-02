@@ -52,7 +52,7 @@ export class FinancialService {
 
 
 
-    obterMenu(): Observable<any> {
+    getModelMenuCache(): Observable<any> {
       const key = 'menu'; 
       return this.cacheService.cacheObservable(key, this.httpClient.get<modelMenu[]>('http://127.0.0.1:8000/api/menu/').pipe(shareReplay()));
     }
