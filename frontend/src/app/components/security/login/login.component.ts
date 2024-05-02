@@ -31,9 +31,9 @@ export class LoginComponent {
   loginService = inject(LoginService)
   router = inject(Router)
 
-  constructor() { }
+  constructor() {}
+
   ngOnInit(): void {
-    this.loginOn();
 
     
   }
