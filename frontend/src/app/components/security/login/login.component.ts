@@ -1,29 +1,19 @@
-import { FinancialService } from './../../../service/financial.service';
-import { LocalStorageService } from 'angular-web-storage';
-import { routes } from './../../../app.routes';
-import { modelLogin, modelBox } from './../../../models/financial.model';
+
+import { modelLogin } from './../../../models/financial.model';
 import { CommonModule } from '@angular/common';
 import { LoginService } from './../../../service/login.service';
-import { Component } from '@angular/core';
-import { Route, RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { response } from 'express';
-import { Token } from '@angular/compiler';
-import test from 'node:test';
-import { get } from 'http';
-import { access } from 'fs';
+import { Observable } from 'rxjs';
+
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [RouterOutlet,
     CommonModule,
     FormsModule,
-  
-  
-  
-  
   ],
   
   templateUrl: './login.component.html',
@@ -36,29 +26,17 @@ import { access } from 'fs';
 export class LoginComponent {
   username = '';
   password = '';
-
-  data$ = new Observable<modelBox[]>;
   dataLogin$ = new Observable<modelLogin[]>;
 
-  constructor(private loginService: LoginService, private router: Router, private FinancialService: FinancialService) { }
+  loginService = inject(LoginService)
+  router = inject(Router)
+
+  constructor() { }
   ngOnInit(): void {
     this.loginOn();
 
     
   }
-
-  getData() {
-
-    this.data$ = this.FinancialService.obterDadosFinanceiros(); 
-    this.data$.subscribe(data => {
-      let teste = data
-
-  
-  
-  
-    })
-  }
-  
 
 
   loginOn() {
@@ -75,11 +53,9 @@ export class LoginComponent {
           this.router.navigate(['/caixa']);
         } else {
           console.log('localStorage não está disponível.');
-          this.router.navigate(['/login']);
+          this.router.navigate(['/home']);
         }
-      } else {
-        this.router.navigate(['/login']);
-      }
+      } 
     });
   }
 
