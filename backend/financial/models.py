@@ -52,6 +52,7 @@ class Orders(models.Model):
         ('PREPARATION', 'In preparation'),
         ('READY', 'Ready'),
         ('CLOSED', 'Closed'),
+        ('CANCELED', 'Canceled')
 
     )
     status = models.CharField(max_length=11, choices=STATUS_CHOICES)
