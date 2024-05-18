@@ -1,8 +1,5 @@
 .container{
     margin: 0 auto;
-
-
-
 }
 
 .card{
@@ -13,15 +10,19 @@
     color: var(--var-color-text);
 
 }
-
 .card-body input{
     background-color: #343434;
+    color: white;
+    border: none;
+    border-radius: 20px;
 
 }
-
 .card-body button{
     text-align: center;
     padding: 3px 40px !important;
+    border: none;
+    border-radius: 25px;
+    background-color: red;
 
 }
 .card-body button:hover{
@@ -30,81 +31,26 @@
 .card-body a{
     color: #a5a5a5 !important;
     font-size: 14px;
-
-
+    text-decoration: none;
+    border-bottom: solid 1px red;
+    transition: 1.5s;
 }
-
+.card-body a:hover{
+    border: none;
+}
 .text-center{
     color: var(--var-color-text);
     font-size: 13px;
 }
-
 .text-center a{
     color: var(--var-color-text) !important;
     font-size: 13px;
 }
 
-.custom-text{
-    color: white;
-    background-color: red;
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-    margin-left: 200px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-}
-
-.custom-text h2{
-    font-weight: 700;
-    font-size: 36pt;
-    letter-spacing: -3px;
-
-
-}
-
-button{
-
-    border: none;
-    border-radius: 25px;
-    background-color: red;
-
-}
-button:hover{
-    background-color: #ffffff;
-    color: red;
-    border: solid 1px red;
-}
-
-
-img{
-    width: auto;
-    height: 500px;
-    border-bottom-right-radius: 15px;
-    border-top-right-radius: 15px;
-
-
-}
-
-input{
-
-
-    border: none;
-    border-radius: 20px;
-}
-
-.teste{
-    margin-left: 15px;
-
-}
-
-
-.custom-password{
 
 
 
-}
 
- a{
-    text-decoration: none !important;
-    color: rgb(56, 56, 56) !important;
 
-}
+
+
