@@ -1,37 +1,55 @@
-<div class="container">
-   <div class="row">
-
-         <div class="card-body card-custom">
-
-            <div class="row">
-               
-                  <div class="col-4 custom-text">
-                     <div class="teste">
-                        <form (submit)="loginOn()">
-                           <h2 class="title2 mt-5">Faça o<br> seu login</h2>
-                           <div class="mb-3 mt-4">
-                           <label for="exampleInputEmail1" class="form-label">Nome de Usuário</label>
-                           <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" [(ngModel)]="username" name="user_name">
-                           <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                           </div>
-                           <div class="mb-3">
-                           <label for="exampleInputPassword1" class="form-label">Senha</label>
-                           <input type="password" class="form-control" id="exampleInputPassword1" [(ngModel)]="password" name="password">
-                           </div>
-                           <div class="mb-3 form-check">
-                           <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                           <label class="form-check-label" for="exampleCheck1">Lembrar de mim</label>
-                           </div>
-                           <button type="submit" class="btn btn-primary" (click)="loginOn()">Fazer Login <i class="fa-solid fa-arrow-right ms-5"></i></button>
-                        </form>
+<section class="vh-100 d-flex align-items-center justify-content-center">
+   <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9 col-xxl-8">
+      <div class="row justify-content-sm-center h-100">
+         <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
+            <div class="card shadow-lg">
+               <div class="card-body p-5">
+                  <h1 class="fs-4 card-title fw-bold mb-4">Login</h1>
+                  <form method="POST" class="needs-validation" novalidate="" autocomplete="off">
+                     <div class="mb-3">
+                        <label class="mb-2 text-muted" for="email">Username</label>
+                        <input id="email" type="email" class="form-control" name="email" value="" required autofocus [(ngModel)]="username">
+                        <div class="invalid-feedback">
+                           Seu nome de usuário
+                        </div>
                      </div>
+
+                     <div class="mb-3">
+                        <div class="mb-2 w-100">
+                           <label class="text-muted" for="password">Senha</label>
+                           <a href="forgot.html" class="float-end custom-password">
+                              Redefinir Senha?
+                           </a>
+                        </div>
+                        <input id="password" type="password" class="form-control" name="password" required [(ngModel)]="password">
+                         <div class="invalid-feedback">
+                            Password is required
+                         </div>
+                     </div>
+
+                     <div class="d-flex align-items-center">
+                        <div class="form-check">
+                           <input type="checkbox" name="remember" id="remember" class="form-check-input">
+                           <label for="remember" class="form-check-label">Lembrar Senha</label>
+                        </div>
+                     </div>
+                     <div class="d-flex justify-content-center mt-4">
+                        <button type="submit" class="btn btn-primary" (click)="loginOn()">
+                           Login
+                        </button>
+                     </div>
+                  </form>
+               </div>
+               <div class="card-footer py-3 border-0">
+                  <div class="text-center">
+                     Ainda sem uma conta? <a href="register.html" class="text-dark">Crie uma</a>
                   </div>
-         
-               <div class="col-2 p-0">
-                  <img src="./assets/img/avatar.jpg" alt="">
                </div>
             </div>
+            <div class="text-center mt-5 text-muted">
+               Copyright &copy; 2024-2024 &mdash; Menufy 
+            </div>
          </div>
-
+      </div>
    </div>
-</div>
+</section>

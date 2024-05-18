@@ -5,10 +5,43 @@
 
 }
 
-.card-custom{
+.card{
+    background-color: var(--color-cards);
+    border-radius: 25px;
+}
+.card-body{
+    color: var(--var-color-text);
 
-    margin-top: 150px;
+}
 
+.card-body input{
+    background-color: #343434;
+
+}
+
+.card-body button{
+    text-align: center;
+    padding: 3px 40px !important;
+
+}
+.card-body button:hover{
+    background-color: transparent;
+}
+.card-body a{
+    color: #a5a5a5 !important;
+    font-size: 14px;
+
+
+}
+
+.text-center{
+    color: var(--var-color-text);
+    font-size: 13px;
+}
+
+.text-center a{
+    color: var(--var-color-text) !important;
+    font-size: 13px;
 }
 
 .custom-text{
