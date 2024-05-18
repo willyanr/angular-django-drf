@@ -53,12 +53,25 @@ img{
 
 input{
 
-    background-color: rgb(134, 102, 102);
+
     border: none;
     border-radius: 20px;
 }
 
 .teste{
     margin-left: 15px;
+
+}
+
+
+.custom-password{
+
+
+
+}
+
+ a{
+    text-decoration: none !important;
+    color: rgb(56, 56, 56) !important;
 
 }

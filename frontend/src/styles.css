@@ -6,6 +6,8 @@
     --var-color-red: #cccccc;
     --form-check-input-bg:  #8c00ff; 
     --form-check-input-checked-color: #ffffff; 
+    --color-cards: #202020;
+    --color-title: rgb(216, 216, 216);
 
     
   }
@@ -127,5 +129,16 @@ body{
   color: #ffffff;
   border: none;
 
+
+}
+
+.modal-body{
+  background-color: #202020;
+
+}
+
+.modal-header{
+  background-color: red;
+  border-bottom: none;
 
 }
